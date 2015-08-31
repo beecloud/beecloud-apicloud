@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FB81317C-2790-4973-BC60-23DE41A3232E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7CC96859A46C91971DC96BF0871F943EDF8C3B8A</key>
+		<string>https://git.coding.net/ewenlong0204/APICloud.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BCPaySDK.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7CC96859A46C91971DC96BF0871F943EDF8C3B8A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://git.coding.net/ewenlong0204/APICloud.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7CC96859A46C91971DC96BF0871F943EDF8C3B8A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7CC96859A46C91971DC96BF0871F943EDF8C3B8A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>APICloud</string>
+		</dict>
+	</array>
+</dict>
+</plist>
