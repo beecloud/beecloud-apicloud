@@ -20,6 +20,12 @@
         
         instance.appId = nil;
         instance.appSecret = nil;
+        
+        instance.payPalClientID = nil;
+        instance.payPalSecret = nil;
+        
+        instance.isPayPalSandBox = NO;
+        
         instance.networkTimeout = 5.0;
         instance.willPrintLogMsg = NO;
         

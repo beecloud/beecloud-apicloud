@@ -27,6 +27,22 @@
 @property (nonatomic, strong) NSString *appSecret;
 
 /**
+ *  PayPal client ID
+ */
+@property (nonatomic, strong) NSString *payPalClientID;
+
+/**
+ *  PayPal secret
+ */
+@property (nonatomic, strong) NSString *payPalSecret;
+
+/**
+ *  PayPal SandBox Client ID
+ */
+@property (nonatomic, assign) BOOL isPayPalSandBox;
+
+
+/**
  *  Default network timeout in seconds for all network requests. Change this value via [BeeCloud setNetworkTimeout:];
  */
 @property (nonatomic) NSTimeInterval networkTimeout;

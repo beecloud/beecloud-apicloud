@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "BCPayConstant.h"
 #import "BCPayCache.h"
-#import "BCPayObject.h"
+//#import "BCPayObject.h"
 
 
 @interface BCPayUtil : NSObject
@@ -177,42 +177,6 @@
  *  @return YES if uuid format is valid, or NO if format is invalid or when uuid is nil.
  */
 + (BOOL)isValidUUID:(NSString *)uuid;
-
-/**
- *  Check whether the string is made up of some digits or letters.
- *
- *  @param str string to be check
- *
- *  @return YES if the String is made up of some digits or letters.
- */
-+ (BOOL)isValidTraceNo:(NSString *)str;
-
-/**
- *  Check the validness of a String
- *
- *  @param str string to be check
- *
- *  @return YES if the String is not nil ,the string'length is not 0.
- */
-+ (BOOL)isValidString:(NSString *)str;
-
-/**
- *  Check whether the string is pure Numbers
- *
- *  @param str Str
- *
- *  @return YES if the string is pure Numbers.
- */
-+ (BOOL)isPureInt:(NSString *)str;
-
-/**
- *  Check whether the string is pure float
- *
- *  @param str Str
- *
- *  @return YES if the string is pure float.
- */
-+ (BOOL)isPureFloat:(NSString *)str;
 
 /**
  *  A string's bytes
