@@ -10,9 +10,6 @@
 #import "BCPayObjects.h"
 #import "NSString+IsValid.h"
 
-@class BCBaseReq;
-@class BCBaseResp;
-
 @protocol BCApiDelegate <NSObject>
 @required
 /**
@@ -43,15 +40,6 @@
  *  @return 成功返回YES，失败返回NO。只有YES的情况下，才能正常执行微信支付。
  */
 + (BOOL)initWeChatPay:(NSString *)wxAppID;
-
-/**
- *  init PayPal
- *
- *  @param clientID paypal clientId
- *  @param secret   paypal secret
- *  @param isSandBox 是否是sanbox环境
- */
-+ (void)initPayPal:(NSString *)clientID secret:(NSString *)secret sanBox:(BOOL)isSandBox ;
 
 /**
  * 处理通过URL启动App时传递的数据。需要在application:openURL:sourceApplication:annotation:中调用。

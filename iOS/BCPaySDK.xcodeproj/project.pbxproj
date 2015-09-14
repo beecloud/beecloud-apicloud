@@ -30,10 +30,6 @@
 		3682750A1B9D573C003F9638 /* UZModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274A81B9D573C003F9638 /* UZModule.h */; };
 		3682750B1B9D573C003F9638 /* BCBaseReq.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274AB1B9D573C003F9638 /* BCBaseReq.h */; };
 		3682750C1B9D573C003F9638 /* BCBaseReq.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274AC1B9D573C003F9638 /* BCBaseReq.m */; };
-		3682750D1B9D573C003F9638 /* BCPayPalReq.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274AD1B9D573C003F9638 /* BCPayPalReq.h */; };
-		3682750E1B9D573C003F9638 /* BCPayPalReq.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274AE1B9D573C003F9638 /* BCPayPalReq.m */; };
-		3682750F1B9D573C003F9638 /* BCPayPalVerifyReq.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274AF1B9D573C003F9638 /* BCPayPalVerifyReq.h */; };
-		368275101B9D573C003F9638 /* BCPayPalVerifyReq.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274B01B9D573C003F9638 /* BCPayPalVerifyReq.m */; };
 		368275111B9D573C003F9638 /* BCPayReq.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274B11B9D573C003F9638 /* BCPayReq.h */; };
 		368275121B9D573C003F9638 /* BCPayReq.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274B21B9D573C003F9638 /* BCPayReq.m */; };
 		368275131B9D573C003F9638 /* BCQueryRefundReq.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274B31B9D573C003F9638 /* BCQueryRefundReq.h */; };
@@ -131,7 +127,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		364BC4D41B5502C700EAFCCE /* libBCPay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBCPay.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		364BC4D41B5502C700EAFCCE /* libBeeCloud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBeeCloud.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		368274A21B9D573C003F9638 /* BeeCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeeCloud.h; sourceTree = "<group>"; };
 		368274A31B9D573C003F9638 /* BeeCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeeCloud.m; sourceTree = "<group>"; };
 		368274A51B9D573C003F9638 /* NSDictionaryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryUtils.h; sourceTree = "<group>"; };
@@ -140,10 +136,6 @@
 		368274A81B9D573C003F9638 /* UZModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZModule.h; sourceTree = "<group>"; };
 		368274AB1B9D573C003F9638 /* BCBaseReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCBaseReq.h; sourceTree = "<group>"; };
 		368274AC1B9D573C003F9638 /* BCBaseReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCBaseReq.m; sourceTree = "<group>"; };
-		368274AD1B9D573C003F9638 /* BCPayPalReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCPayPalReq.h; sourceTree = "<group>"; };
-		368274AE1B9D573C003F9638 /* BCPayPalReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCPayPalReq.m; sourceTree = "<group>"; };
-		368274AF1B9D573C003F9638 /* BCPayPalVerifyReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCPayPalVerifyReq.h; sourceTree = "<group>"; };
-		368274B01B9D573C003F9638 /* BCPayPalVerifyReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCPayPalVerifyReq.m; sourceTree = "<group>"; };
 		368274B11B9D573C003F9638 /* BCPayReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCPayReq.h; sourceTree = "<group>"; };
 		368274B21B9D573C003F9638 /* BCPayReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCPayReq.m; sourceTree = "<group>"; };
 		368274B31B9D573C003F9638 /* BCQueryRefundReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCQueryRefundReq.h; sourceTree = "<group>"; };
@@ -241,7 +233,7 @@
 		364BC4D51B5502C700EAFCCE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				364BC4D41B5502C700EAFCCE /* libBCPay.a */,
+				364BC4D41B5502C700EAFCCE /* libBeeCloud.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -295,10 +287,6 @@
 			children = (
 				368274AB1B9D573C003F9638 /* BCBaseReq.h */,
 				368274AC1B9D573C003F9638 /* BCBaseReq.m */,
-				368274AD1B9D573C003F9638 /* BCPayPalReq.h */,
-				368274AE1B9D573C003F9638 /* BCPayPalReq.m */,
-				368274AF1B9D573C003F9638 /* BCPayPalVerifyReq.h */,
-				368274B01B9D573C003F9638 /* BCPayPalVerifyReq.m */,
 				368274B11B9D573C003F9638 /* BCPayReq.h */,
 				368274B21B9D573C003F9638 /* BCPayReq.m */,
 				368274B31B9D573C003F9638 /* BCQueryRefundReq.h */,
@@ -498,12 +486,10 @@
 				368275211B9D573C003F9638 /* BCBaseResult.h in Headers */,
 				3682754F1B9D573C003F9638 /* BCPayCache.h in Headers */,
 				368275191B9D573C003F9638 /* BCBaseResp.h in Headers */,
-				3682750F1B9D573C003F9638 /* BCPayPalVerifyReq.h in Headers */,
 				3682751B1B9D573C003F9638 /* BCPayResp.h in Headers */,
 				368275111B9D573C003F9638 /* BCPayReq.h in Headers */,
 				368275451B9D573C003F9638 /* PayPalFuturePaymentViewController.h in Headers */,
 				3682753E1B9D573C003F9638 /* NSObject+SBJSON.h in Headers */,
-				3682750D1B9D573C003F9638 /* BCPayPalReq.h in Headers */,
 				3682754B1B9D573C003F9638 /* UPPayPlugin.h in Headers */,
 				368275521B9D573C003F9638 /* BCPayObjects.h in Headers */,
 				3682753C1B9D573C003F9638 /* JSON.h in Headers */,
@@ -542,7 +528,7 @@
 			);
 			name = BCPaySDK;
 			productName = BCPaySDK;
-			productReference = 364BC4D41B5502C700EAFCCE /* libBCPay.a */;
+			productReference = 364BC4D41B5502C700EAFCCE /* libBeeCloud.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -620,9 +606,7 @@
 				368275061B9D573C003F9638 /* BeeCloud.m in Sources */,
 				368275201B9D573C003F9638 /* BCRefundStatusResp.m in Sources */,
 				3682751E1B9D573C003F9638 /* BCQueryResp.m in Sources */,
-				3682750E1B9D573C003F9638 /* BCPayPalReq.m in Sources */,
 				368275221B9D573C003F9638 /* BCBaseResult.m in Sources */,
-				368275101B9D573C003F9638 /* BCPayPalVerifyReq.m in Sources */,
 				368275561B9D573C003F9638 /* NSString+IsValid.m in Sources */,
 				368275311B9D573C003F9638 /* AFSecurityPolicy.m in Sources */,
 				368275161B9D573C003F9638 /* BCQueryReq.m in Sources */,

@@ -72,20 +72,13 @@
 
     NSDictionary *feature = [theApp getFeatureByName:kKeyMoudleName];
     NSString *bcAppid = [feature stringValueForKey:kKeyBCAppID defaultValue:nil];
-    NSString *bcAppsecret = [feature stringValueForKey:kKeyBCAppSecret defaultValue:nil];
     NSString *wxAppid = [feature stringValueForKey:kKeyUrlScheme defaultValue:nil];
-    NSString *payPalClientID = [feature stringValueForKey:kKeyPayPalClientID defaultValue:@""];
-    NSString *payPalSecret = [feature stringValueForKey:kKeyPayPalSecret defaultValue:@""];
-    BOOL payPalSandBox = [feature boolValueForKey:kKeyPayPalSandBox defaultValue:NO];
     
-    if (bcAppid.isValid && bcAppsecret.isValid) {
-        [BCPay initWithAppID:bcAppid andAppSecret:bcAppsecret];
+    if (bcAppid.isValid) {
+        [BCPay initWithAppID:bcAppid andAppSecret:@""];
     }
     if (wxAppid.isValid) {
         [BCPay initWeChatPay:wxAppid];
-    }
-    if (payPalClientID.isValid && payPalSecret.isValid) {
-        [BCPay initPayPal:payPalClientID secret:payPalSecret sanBox:payPalSandBox];
     }
 }
 

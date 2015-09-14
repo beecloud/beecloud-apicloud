@@ -37,8 +37,7 @@ static NSString * const kBCHosts[] = {@"https://apisz.beecloud.cn",
 static NSString * const reqApiVersion = @"/1";
 
 //rest api
-static NSString * const kRestApiPay = @"%@/rest/bill";
-static NSString * const kRestApiRefund = @"%@/rest/refund";
+static NSString * const kRestApiPay = @"%@/rest/app/bill";
 static NSString * const kRestApiQueryBills = @"%@/rest/bills";
 static NSString * const kRestApiQueryRefunds = @"%@/rest/refunds";
 static NSString * const kRestApiRefundState = @"%@/rest/refund/status";
@@ -107,10 +106,7 @@ typedef NS_ENUM(NSInteger, BCObjsType) {
     
     BCObjsTypeBaseResults = 300,
     BCObjsTypeBillResults,
-    BCObjsTypeRefundResults,
-    
-    BCObjsTypePayPal = 400,
-    BCObjsTypePayPalVerify
+    BCObjsTypeRefundResults
 };
 
 static NSString * const kBCDateFormat = @"yyyy-MM-dd HH:mm";

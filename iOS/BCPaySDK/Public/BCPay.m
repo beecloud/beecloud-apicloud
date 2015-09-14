@@ -17,9 +17,7 @@
 
 @interface BCPay ()<WXApiDelegate, UPPayPluginDelegate>
 
-@property (nonatomic, assign) BOOL registerStatus;
 @property (nonatomic, weak) id<BCApiDelegate> deleagte;
-@property (nonatomic, strong) UIViewController *upController;
 
 @end
 
@@ -30,9 +28,6 @@
     static BCPay *instance = nil;
     dispatch_once(&onceToken, ^{
         instance = [[BCPay alloc] init];
-        instance.registerStatus = NO;
-
-        instance.upController = [[UIViewController alloc] init];
     });
     return instance;
 }
@@ -45,29 +40,7 @@
 }
 
 + (BOOL)initWeChatPay:(NSString *)wxAppID {
-    BCPay *instance = [BCPay sharedInstance];
-    instance.registerStatus =  [WXApi registerApp:wxAppID];
-    return instance.registerStatus;
-}
-
-+ (void)initPayPal:(NSString *)clientID secret:(NSString *)secret sanBox:(BOOL)isSandBox {
-    if(clientID.isValid && secret.isValid) {
-        BCPayCache *instance = [BCPayCache sharedInstance];
-        instance.payPalClientID = clientID;
-        instance.payPalSecret = secret;
-        instance.isPayPalSandBox = isSandBox;
-        
-        if (isSandBox) {
-            [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction : @"YOUR_PRODUCTION_CLIENT_ID",
-                                                                   PayPalEnvironmentSandbox : clientID}];
-            [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
-        } else {
-            [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction : clientID,
-                                                                   PayPalEnvironmentSandbox : @"YOUR_SANDBOX_CLIENT_ID"}];
-            [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentProduction];
-        }
-        
-    }
+    return [WXApi registerApp:wxAppID];
 }
 
 + (void)setBCApiDelegate:(id<BCApiDelegate>)delegate {
@@ -123,12 +96,6 @@
             break;
         case BCObjsTypeRefundStatusReq:
             [instance reqRefundStatus:(BCRefundStatusReq *)req];
-            break;
-        case BCObjsTypePayPal:
-            [instance  reqPayPal:(BCPayPalReq *)req];
-            break;
-        case BCObjsTypePayPalVerify:
-            [instance reqPayPalVerify:(BCPayPalVerifyReq *)req];
             break;
         default:
             break;
@@ -235,102 +202,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [UPPayPlugin startPay:tn mode:@"00" viewController:(UIViewController *)[dic objectForKey:@"viewController"] delegate:[BCPay sharedInstance]];
     });
-}
-
-#pragma mark - PayPal
-- (void)reqPayPal:(BCPayPalReq *)req {
-    
-    if (![self checkParameters:req]) return;
-    
-    NSDecimalNumber *subtotal = [PayPalItem totalPriceForItems:req.items];
-    
-    // Optional: include payment details
-    NSDecimalNumber *dShipping = [[NSDecimalNumber alloc] initWithString:req.shipping];
-    NSDecimalNumber *dTax = [[NSDecimalNumber alloc] initWithString:req.tax];
-    PayPalPaymentDetails *paymentDetails = [PayPalPaymentDetails paymentDetailsWithSubtotal:subtotal
-                                                                               withShipping:dShipping
-                                                                                    withTax:dTax];
-    
-    NSDecimalNumber *total = [[subtotal decimalNumberByAdding:dShipping] decimalNumberByAdding:dTax];
-    
-    PayPalPayment *payment = [[PayPalPayment alloc] init];
-    payment.amount = total;
-    payment.currencyCode = ((PayPalItem *)req.items.lastObject).currency;
-    payment.shortDescription = req.shortDesc;
-    payment.items = req.items;
-    payment.paymentDetails = paymentDetails;
-    
-    if (!payment.processable) {
-        // This particular payment will always be processable. If, for
-        // example, the amount was negative or the shortDescription was
-        // empty, this payment wouldn't be processable, and you'd want
-        // to handle that here.
-    }
-    
-    PayPalPaymentViewController *paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
-                                                                                                configuration:req.payConfig
-                                                                                                     delegate:req.viewController];
-    [(UIViewController *)req.viewController presentViewController:paymentViewController animated:YES completion:nil];
-    
-}
-
-- (void)reqPayPalVerify:(BCPayPalVerifyReq *)req {
-    [self reqPayPalAccessToken:req];
-}
-
-- (void)reqPayPalAccessToken:(BCPayPalVerifyReq *)req {
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.securityPolicy.allowInvalidCertificates = NO;
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    
-    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:[BCPayCache sharedInstance].payPalClientID password:[BCPayCache sharedInstance].payPalSecret];
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"client_credentials" forKey:@"grant_type"];
-    
-    [manager POST:[BCPayCache sharedInstance].isPayPalSandBox?kPayPalAccessTokenSandBox:kPayPalAccessTokenProduction parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
-        BCPayLog(@"token %@", response);
-        NSDictionary *dic = (NSDictionary *)response;
-        [self doPayPalVerify:req accessToken:[NSString stringWithFormat:@"%@ %@", [dic objectForKey:@"token_type"],[dic objectForKey:@"access_token"]]];
-    }  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self doErrorResponse:kNetWorkError errDetail:kNetWorkError];
-    }];
-}
-
-- (void)doPayPalVerify:(BCPayPalVerifyReq *)req accessToken:(NSString *)accessToken {
-    
-    if (req == nil || req.payment == nil) {
-        [self doErrorResponse:kKeyCheckParamsFail errDetail:@"请求参数格式不合法"];
-        return ;
-    }
-    NSMutableDictionary *parameters = [BCPayUtil prepareParametersForPay];
-    if (parameters == nil) {
-        [self doErrorResponse:kKeyCheckParamsFail errDetail:@"请检查是否全局初始化"];
-        return;
-    }
-    if ([BCPayCache sharedInstance].isPayPalSandBox) {
-        parameters[@"channel"] = @"PAYPAL_SANDBOX";
-    } else {
-        parameters[@"channel"] = @"PAYPAL";
-    }
-    parameters[@"title"] = @"PayPal Verify Payment";
-    parameters[@"total_fee"] = @((int)([req.payment.amount floatValue] * 100));
-    parameters[@"currency"] = req.payment.currencyCode;
-    parameters[@"bill_no"] = [[req.payment.confirmation[@"response"] objectForKey:@"id"] stringByReplacingOccurrencesOfString:@"PAY-" withString:@""];
-    parameters[@"access_token"] = accessToken;
-    
-    AFHTTPRequestOperationManager *manager = [BCPayUtil getAFHTTPRequestOperationManager];
-    
-    [manager POST:[BCPayUtil getBestHostWithFormat:kRestApiPay] parameters:parameters
-          success:^(AFHTTPRequestOperation *operation, id response) {
-              NSDictionary *resp = (NSDictionary *)response;
-              if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayResp:)]) {
-                  [_deleagte onBCPayResp:resp];
-              }
-          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              [self doErrorResponse:kNetWorkError errDetail:kNetWorkError];
-          }];
 }
 
 #pragma mark Query Bills/Refunds
@@ -540,24 +411,6 @@
             return NO;
         } else if (req.channel == PayChannelWxApp && ![WXApi isWXAppInstalled]) {
             [self doErrorResponse:kKeyCheckParamsFail errDetail:@"未找到微信客户端，请先下载安装"];
-            return NO;
-        }
-    } else if (request.type == BCObjsTypePayPal) {
-        BCPayPalReq *req = (BCPayPalReq *)request;
-        if (req.items == nil || req.items.count == 0) {
-            [self doErrorResponse:kKeyCheckParamsFail errDetail:@"payitem 格式不合法"];
-            return NO;
-        } else if (!req.shipping.isValid) {
-            [self doErrorResponse:kKeyCheckParamsFail errDetail:@"shipping 格式不合法"];
-            return NO;
-        }  else if (!req.tax.isValid) {
-            [self doErrorResponse:kKeyCheckParamsFail errDetail:@"tax 格式不合法"];
-            return NO;
-        } else if (req.payConfig == nil) {
-            [self doErrorResponse:kKeyCheckParamsFail errDetail:@"payConfig 格式不合法"];
-            return NO;
-        } else if (req.viewController == nil) {
-            [self doErrorResponse:kKeyCheckParamsFail errDetail:@"viewController 格式不合法"];
             return NO;
         }
     }
