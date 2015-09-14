@@ -7,34 +7,34 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>FB81317C-2790-4973-BC60-23DE41A3232E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>BCPaySDK</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7CC96859A46C91971DC96BF0871F943EDF8C3B8A</key>
-		<string>https://git.coding.net/ewenlong0204/APICloud.git</string>
+		<key>22D5C70B187B9547F80A6E3A20B2800DABAA169C</key>
+		<string>https://github.com/beecloud/beecloud-apicloud.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BCPaySDK.xcodeproj/project.xcworkspace</string>
+	<string>iOS/BCPaySDK.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7CC96859A46C91971DC96BF0871F943EDF8C3B8A</key>
-		<string>../..</string>
+		<key>22D5C70B187B9547F80A6E3A20B2800DABAA169C</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://git.coding.net/ewenlong0204/APICloud.git</string>
+	<string>https://github.com/beecloud/beecloud-apicloud.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7CC96859A46C91971DC96BF0871F943EDF8C3B8A</string>
+	<string>22D5C70B187B9547F80A6E3A20B2800DABAA169C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7CC96859A46C91971DC96BF0871F943EDF8C3B8A</string>
+			<string>22D5C70B187B9547F80A6E3A20B2800DABAA169C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>APICloud</string>
+			<string>beecloud-apicloud</string>
 		</dict>
 	</array>
 </dict>

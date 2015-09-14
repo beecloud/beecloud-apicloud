@@ -9,6 +9,7 @@
 #import "BCPayUtil.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "BCPayCache.h"
+#import "NSString+IsValid.h"
 
 @implementation BCPayUtil
 
@@ -30,12 +31,13 @@
 
 + (NSMutableDictionary *)prepareParametersForPay {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    NSNumber *timeStamp = [NSNumber numberWithLongLong:[BCPayUtil dateToMillisecond:[NSDate date]]];
-    NSString *appSign = [BCPayUtil getAppSignature:[NSString stringWithFormat:@"%@",timeStamp]];
-    if(appSign) {
+   // NSNumber *timeStamp = [NSNumber numberWithLongLong:[BCPayUtil dateToMillisecond:[NSDate date]]];
+   // NSString *appSign = [BCPayUtil getAppSignature:[NSString stringWithFormat:@"%@",timeStamp]];
+    
+    if([BCPayCache sharedInstance].appId.isValid) {
         [parameters setObject:[BCPayCache sharedInstance].appId forKey:@"app_id"];
-        [parameters setObject:timeStamp forKey:@"timestamp"];
-        [parameters setObject:appSign forKey:@"app_sign"];
+//        [parameters setObject:timeStamp forKey:@"timestamp"];
+//        [parameters setObject:appSign forKey:@"app_sign"];
         return parameters;
     }
     return nil;
@@ -62,6 +64,7 @@
 
 + (NSString *)getBestHostWithFormat:(NSString *)format {
     NSString *verHost = [NSString stringWithFormat:@"%@%@",kBCHosts[arc4random()%kBCHostCount],reqApiVersion]; //2015.07.28
+    verHost = @"http://58.211.191.122:8080/1";
     return [NSString stringWithFormat:format, verHost];
 }
 
