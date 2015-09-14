@@ -64,7 +64,6 @@
 
 + (NSString *)getBestHostWithFormat:(NSString *)format {
     NSString *verHost = [NSString stringWithFormat:@"%@%@",kBCHosts[arc4random()%kBCHostCount],reqApiVersion]; //2015.07.28
-    verHost = @"http://58.211.191.122:8080/1";
     return [NSString stringWithFormat:format, verHost];
 }
 
