@@ -81,13 +81,6 @@
 		368275411B9D573C003F9638 /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274E71B9D573C003F9638 /* SBJsonBase.h */; };
 		368275421B9D573C003F9638 /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274E81B9D573C003F9638 /* SBJsonParser.h */; };
 		368275431B9D573C003F9638 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274E91B9D573C003F9638 /* SBJsonWriter.h */; };
-		368275441B9D573C003F9638 /* PayPalConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274EB1B9D573C003F9638 /* PayPalConfiguration.h */; };
-		368275451B9D573C003F9638 /* PayPalFuturePaymentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274EC1B9D573C003F9638 /* PayPalFuturePaymentViewController.h */; };
-		368275461B9D573C003F9638 /* PayPalMobile.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274ED1B9D573C003F9638 /* PayPalMobile.h */; };
-		368275471B9D573C003F9638 /* PayPalOAuthScopes.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274EE1B9D573C003F9638 /* PayPalOAuthScopes.h */; };
-		368275481B9D573C003F9638 /* PayPalPayment.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274EF1B9D573C003F9638 /* PayPalPayment.h */; };
-		368275491B9D573C003F9638 /* PayPalPaymentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274F01B9D573C003F9638 /* PayPalPaymentViewController.h */; };
-		3682754A1B9D573C003F9638 /* PayPalProfileSharingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274F11B9D573C003F9638 /* PayPalProfileSharingViewController.h */; };
 		3682754B1B9D573C003F9638 /* UPPayPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274F31B9D573C003F9638 /* UPPayPlugin.h */; };
 		3682754C1B9D573C003F9638 /* UPPayPluginDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274F41B9D573C003F9638 /* UPPayPluginDelegate.h */; };
 		3682754D1B9D573C003F9638 /* WXApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274F61B9D573C003F9638 /* WXApi.h */; };
@@ -187,13 +180,6 @@
 		368274E71B9D573C003F9638 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		368274E81B9D573C003F9638 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		368274E91B9D573C003F9638 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		368274EB1B9D573C003F9638 /* PayPalConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalConfiguration.h; sourceTree = "<group>"; };
-		368274EC1B9D573C003F9638 /* PayPalFuturePaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalFuturePaymentViewController.h; sourceTree = "<group>"; };
-		368274ED1B9D573C003F9638 /* PayPalMobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalMobile.h; sourceTree = "<group>"; };
-		368274EE1B9D573C003F9638 /* PayPalOAuthScopes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalOAuthScopes.h; sourceTree = "<group>"; };
-		368274EF1B9D573C003F9638 /* PayPalPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalPayment.h; sourceTree = "<group>"; };
-		368274F01B9D573C003F9638 /* PayPalPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalPaymentViewController.h; sourceTree = "<group>"; };
-		368274F11B9D573C003F9638 /* PayPalProfileSharingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalProfileSharingViewController.h; sourceTree = "<group>"; };
 		368274F31B9D573C003F9638 /* UPPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPlugin.h; sourceTree = "<group>"; };
 		368274F41B9D573C003F9638 /* UPPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPluginDelegate.h; sourceTree = "<group>"; };
 		368274F61B9D573C003F9638 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -333,7 +319,6 @@
 				368274CA1B9D573C003F9638 /* AFNetworking */,
 				368274DE1B9D573C003F9638 /* AliPay */,
 				368274E11B9D573C003F9638 /* JSON */,
-				368274EA1B9D573C003F9638 /* PayPal */,
 				368274F21B9D573C003F9638 /* UnionPay */,
 				368274F51B9D573C003F9638 /* WXPay */,
 			);
@@ -390,20 +375,6 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
-		368274EA1B9D573C003F9638 /* PayPal */ = {
-			isa = PBXGroup;
-			children = (
-				368274EB1B9D573C003F9638 /* PayPalConfiguration.h */,
-				368274EC1B9D573C003F9638 /* PayPalFuturePaymentViewController.h */,
-				368274ED1B9D573C003F9638 /* PayPalMobile.h */,
-				368274EE1B9D573C003F9638 /* PayPalOAuthScopes.h */,
-				368274EF1B9D573C003F9638 /* PayPalPayment.h */,
-				368274F01B9D573C003F9638 /* PayPalPaymentViewController.h */,
-				368274F11B9D573C003F9638 /* PayPalProfileSharingViewController.h */,
-			);
-			path = PayPal;
-			sourceTree = "<group>";
-		};
 		368274F21B9D573C003F9638 /* UnionPay */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,7 +425,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				368275341B9D573C003F9638 /* AFURLRequestSerialization.h in Headers */,
-				368275491B9D573C003F9638 /* PayPalPaymentViewController.h in Headers */,
 				368275531B9D573C003F9638 /* BCPayUtil.h in Headers */,
 				3682752D1B9D573C003F9638 /* AFNetworking.h in Headers */,
 				368275381B9D573C003F9638 /* AFURLSessionManager.h in Headers */,
@@ -468,16 +438,12 @@
 				368275421B9D573C003F9638 /* SBJsonParser.h in Headers */,
 				368275301B9D573C003F9638 /* AFSecurityPolicy.h in Headers */,
 				3682750B1B9D573C003F9638 /* BCBaseReq.h in Headers */,
-				368275461B9D573C003F9638 /* PayPalMobile.h in Headers */,
-				368275481B9D573C003F9638 /* PayPalPayment.h in Headers */,
 				3682751D1B9D573C003F9638 /* BCQueryResp.h in Headers */,
 				368275231B9D573C003F9638 /* BCQueryBillResult.h in Headers */,
 				368275431B9D573C003F9638 /* SBJsonWriter.h in Headers */,
-				368275471B9D573C003F9638 /* PayPalOAuthScopes.h in Headers */,
 				3682752E1B9D573C003F9638 /* AFNetworkReachabilityManager.h in Headers */,
 				368275271B9D573C003F9638 /* AFHTTPRequestOperation.h in Headers */,
 				368275511B9D573C003F9638 /* BCPayConstant.h in Headers */,
-				368275441B9D573C003F9638 /* PayPalConfiguration.h in Headers */,
 				3682754D1B9D573C003F9638 /* WXApi.h in Headers */,
 				3682753F1B9D573C003F9638 /* NSString+SBJSON.h in Headers */,
 				368275251B9D573C003F9638 /* BCQueryRefundResult.h in Headers */,
@@ -488,7 +454,6 @@
 				368275191B9D573C003F9638 /* BCBaseResp.h in Headers */,
 				3682751B1B9D573C003F9638 /* BCPayResp.h in Headers */,
 				368275111B9D573C003F9638 /* BCPayReq.h in Headers */,
-				368275451B9D573C003F9638 /* PayPalFuturePaymentViewController.h in Headers */,
 				3682753E1B9D573C003F9638 /* NSObject+SBJSON.h in Headers */,
 				3682754B1B9D573C003F9638 /* UPPayPlugin.h in Headers */,
 				368275521B9D573C003F9638 /* BCPayObjects.h in Headers */,
@@ -503,7 +468,6 @@
 				3682753B1B9D573C003F9638 /* APayAuthInfo.h in Headers */,
 				368275071B9D573C003F9638 /* NSDictionaryUtils.h in Headers */,
 				368275361B9D573C003F9638 /* AFURLResponseSerialization.h in Headers */,
-				3682754A1B9D573C003F9638 /* PayPalProfileSharingViewController.h in Headers */,
 				368275091B9D573C003F9638 /* UZAppUtils.h in Headers */,
 				3682750A1B9D573C003F9638 /* UZModule.h in Headers */,
 				3682754E1B9D573C003F9638 /* WXApiObject.h in Headers */,
