@@ -18,6 +18,8 @@
  *  @param resp 响应体
  */
 - (void)onBCPayResp:(id)resp;
+@optional
+- (void)onBCPayBaidu:(NSString *)url;
 
 @end
 
@@ -29,7 +31,7 @@
  *  @param appId     BeeCloud平台APPID
  *  @param appSecret BeeCloud平台APPSECRET
  */
-+ (void)initWithAppID:(NSString *)appId andAppSecret:(NSString *)appSecret;
++ (void)initWithAppID:(NSString *)appId;
 
 /**
  *  需要在每次启动第三方应用程序时调用。第一次调用后，会在微信的可用应用列表中出现。
@@ -85,7 +87,7 @@
  *
  *  @return channelType
  */
-+ (PayChannel)getChannelType:(NSString *)channel;
+- (BOOL)isValidChannel:(NSString *)channel;
 
 #pragma mark - Send BeeCloud Request
 

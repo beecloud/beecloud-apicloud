@@ -18,7 +18,7 @@
 /**
  *  支付渠道(WX,Ali,Union)
  */
-@property (nonatomic, assign) PayChannel channel;
+@property (nonatomic, retain) NSString *channel;
 /**
  *  订单描述,32个字节内,最长16个汉字
  */
