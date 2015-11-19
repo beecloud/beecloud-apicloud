@@ -10,17 +10,16 @@
 #import "BCPayObjects.h"
 #import "NSString+IsValid.h"
 
-@protocol BCApiDelegate <NSObject>
+@protocol BeeCloudDelegate <NSObject>
 @required
 /**
  *  不同类型的请求，对应不同的响应
  *
  *  @param resp 响应体
  */
-- (void)onBCPayResp:(id)resp;
+- (void)onBeeCloudResp:(id)resp;
 @optional
-- (void)onBCPayBaidu:(NSString *)url;
-
+- (void)onBeeCloudBaidu:(NSString *)url;
 @end
 
 @interface BCPay : NSObject
@@ -55,9 +54,9 @@
 /**
  *  设置接收消息的对象
  *
- *  @param delegate BCApiDelegate对象，用来接收BeeCloud触发的消息。
+ *  @param delegate BeeCloudDelegate对象，用来接收BeeCloud触发的消息。
  */
-+ (void)setBCApiDelegate:(id<BCApiDelegate>)delegate;
++ (void)setBeeCloudDelegate:(id<BeeCloudDelegate>)delegate;
 
 /**
  *  获取API版本号

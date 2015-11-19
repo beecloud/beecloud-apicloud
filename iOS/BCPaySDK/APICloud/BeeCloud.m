@@ -16,7 +16,7 @@
 #import "JSON.h"
 #import "BaiduViewController.h"
 
-@interface BeeCloud ()<UIApplicationDelegate, BCApiDelegate, BaiduViewControllerDelegate> {
+@interface BeeCloud ()<UIApplicationDelegate, BeeCloudDelegate, BaiduViewControllerDelegate> {
     NSInteger _cbId;
 }
 
@@ -26,7 +26,6 @@
 
 - (void)pay:(NSDictionary *)paramDic {
     NSLog(@"do pay");
-    NSLog(@"%@", [self class]);
     
     _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
     BCPayReq *payReq = [[BCPayReq alloc] init];
@@ -51,13 +50,13 @@
     return [formatter stringFromDate:[NSDate date]];
 }
 
-- (void)onBCPayResp:(id)resp {
+- (void)onBeeCloudResp:(id)resp {
     if (_cbId >= 0) {
         [self sendResultEventWithCallbackId:_cbId dataDict:(NSDictionary *)resp errDict:nil doDelete:YES];
     }
 }
 
-- (void)onBCPayBaidu:(NSString *)url {
+- (void)onBeeCloudBaidu:(NSString *)url {
 
     BaiduViewController *bd = [[BaiduViewController alloc] init];
     bd.url = url;
@@ -76,7 +75,7 @@
 - (id)initWithUZWebView:(UZWebView *)webView_ {
     if (self = [super initWithUZWebView:webView_]) {
         [theApp addAppHandle:self];
-        [BCPay setBCApiDelegate:self];
+        [BCPay setBeeCloudDelegate:self];
     }
     return self;
 }
@@ -86,7 +85,7 @@
 }
 
 + (void)launch {
-    NSLog(@"launch %@", theApp.widgetControllers);
+    NSLog(@"launch");
 
     NSDictionary *feature = [theApp getFeatureByName:kKeyMoudleName];
     NSString *bcAppid = [feature stringValueForKey:kKeyBCAppID defaultValue:nil];
@@ -103,6 +102,10 @@
 
 #pragma mark - UIApplicationDelegate
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+     return [BCPay handleOpenUrl:url];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
      return [BCPay handleOpenUrl:url];
 }
 

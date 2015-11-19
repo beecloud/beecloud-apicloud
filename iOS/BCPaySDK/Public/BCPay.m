@@ -17,7 +17,7 @@
 
 @interface BCPay ()<WXApiDelegate, UPPayPluginDelegate>
 
-@property (nonatomic, weak) id<BCApiDelegate> deleagte;
+@property (nonatomic, weak) id<BeeCloudDelegate> deleagte;
 
 @end
 
@@ -42,7 +42,7 @@
     return [WXApi registerApp:wxAppID];
 }
 
-+ (void)setBCApiDelegate:(id<BCApiDelegate>)delegate {
++ (void)setBeeCloudDelegate:(id<BeeCloudDelegate>)delegate {
     [BCPay sharedInstance].deleagte = delegate;
 }
 
@@ -114,6 +114,9 @@
         return;
     }
     
+    if ([req.channel isEqualToString:PayChannelBaiduApp]) {
+        req.channel = PayChannelBaiduWap;
+    }
     parameters[@"channel"] = req.channel;
     parameters[@"total_fee"] = [NSNumber numberWithInteger:[req.totalfee integerValue]];
     parameters[@"bill_no"] = req.billno;
@@ -133,8 +136,8 @@
         
               NSDictionary *resp = (NSDictionary *)response;
               if ([[resp objectForKey:kKeyResponseResultCode] integerValue] != 0) {
-                  if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayResp:)]) {
-                      [_deleagte onBCPayResp:resp];
+                  if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
+                      [_deleagte onBeeCloudResp:resp];
                   }
               } else {
                   NSLog(@"channel=%@,resp=%@", req.channel, response);
@@ -163,12 +166,12 @@
         } else if ([channel isEqualToString:PayChannelUnApp]) {
             [self doUnionPay:dic];
         } else if ([channel isEqualToString:PayChannelBaiduWap]) {
-            if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayBaidu:)]) {
-                [_deleagte onBCPayBaidu:[dic stringValueForKey:@"url" defaultValue:@""]];
+            if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudBaidu:)]) {
+                [_deleagte onBeeCloudBaidu:[dic stringValueForKey:@"url" defaultValue:@""]];
             }
         } else if ([channel isEqualToString:PayChannelBaiduApp]) {
-            if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayBaidu:)]) {
-                [_deleagte onBCPayBaidu:[dic stringValueForKey:@"orderInfo" defaultValue:@""]];
+            if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudBaidu:)]) {
+                [_deleagte onBeeCloudBaidu:[dic stringValueForKey:@"orderInfo" defaultValue:@""]];
             }
         }
     }
@@ -251,8 +254,8 @@
              BCPayLog(@"query end time = %f", [NSDate timeIntervalSinceReferenceDate] - tStart);
              NSDictionary *resp = (NSDictionary *)response;
              if ([resp objectForKey:kKeyResponseResultCode] != 0) {
-                 if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayResp:)]) {
-                     [_deleagte onBCPayResp:resp];
+                 if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
+                     [_deleagte onBeeCloudResp:resp];
                  }
              } else {
                  NSLog(@"channel=%@, resp=%@", req.channel, response);
@@ -266,8 +269,8 @@
 - (void)doQueryResponse:(NSDictionary *)dic {
     NSMutableDictionary *resp = [NSMutableDictionary dictionaryWithDictionary:dic];
     resp[@"type"] = @(BCObjsTypeQueryResp);
-    if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayResp:)]) {
-        [_deleagte onBCPayResp:resp];
+    if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
+        [_deleagte onBeeCloudResp:resp];
     }
 }
 
@@ -309,8 +312,8 @@
     resp.err_detail = dic[kKeyResponseErrDetail];
     resp.refundStatus = [dic objectForKey:@"refund_status"];
     
-    if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayResp:)]) {
-        [_deleagte onBCPayResp:resp];
+    if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
+        [_deleagte onBeeCloudResp:resp];
     }
 }
 
@@ -330,8 +333,8 @@
     dic[kKeyResponseResultMsg] = resultMsg;
     dic[kKeyResponseErrDetail] = errMsg;
     
-    if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayResp:)]) {
-        [_deleagte onBCPayResp:dic];
+    if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
+        [_deleagte onBeeCloudResp:dic];
     }
 }
 
@@ -390,8 +393,8 @@
         dic[kKeyResponseResultMsg] = result;
         dic[kKeyResponseErrDetail] = result;
         
-        if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayResp:)]) {
-            [_deleagte onBCPayResp:dic];
+        if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
+            [_deleagte onBeeCloudResp:dic];
         }
     }
 }
@@ -430,8 +433,8 @@
     dic[kKeyResponseResultMsg] = strMsg;
     dic[kKeyResponseErrDetail] = strMsg;
     
-    if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayResp:)]) {
-        [_deleagte onBCPayResp:dic];
+    if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
+        [_deleagte onBeeCloudResp:dic];
     }
 }
 
@@ -453,8 +456,8 @@
     dic[kKeyResponseResultMsg] = strMsg;
     dic[kKeyResponseErrDetail] = strMsg;
     
-    if (_deleagte && [_deleagte respondsToSelector:@selector(onBCPayResp:)]) {
-        [_deleagte onBCPayResp:dic];
+    if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
+        [_deleagte onBeeCloudResp:dic];
     }
 }
 
