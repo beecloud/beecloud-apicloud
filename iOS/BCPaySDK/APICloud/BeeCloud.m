@@ -13,10 +13,10 @@
 #import "UZAppDelegate.h"
 #import "UZAppUtils.h"
 #import "NSDictionaryUtils.h"
-
 #import "JSON.h"
+#import "BaiduViewController.h"
 
-@interface BeeCloud ()<UIApplicationDelegate, BCApiDelegate> {
+@interface BeeCloud ()<UIApplicationDelegate, BeeCloudDelegate, BaiduViewControllerDelegate> {
     NSInteger _cbId;
 }
 
@@ -26,9 +26,10 @@
 
 - (void)pay:(NSDictionary *)paramDic {
     NSLog(@"do pay");
+    
     _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
     BCPayReq *payReq = [[BCPayReq alloc] init];
-    payReq.channel = [BCPay getChannelType:[paramDic stringValueForKey:@"channel" defaultValue:@""]];
+    payReq.channel = [paramDic stringValueForKey:@"channel" defaultValue:@""];
     payReq.title = [paramDic stringValueForKey:@"title" defaultValue:@""];
     payReq.totalfee = [NSString stringWithFormat:@"%ld",(long)[paramDic integerValueForKey:@"totalfee" defaultValue:0]];
     payReq.billno = [paramDic stringValueForKey:@"billno" defaultValue:@""];
@@ -49,16 +50,32 @@
     return [formatter stringFromDate:[NSDate date]];
 }
 
-- (void)onBCPayResp:(id)resp {
+- (void)onBeeCloudResp:(id)resp {
     if (_cbId >= 0) {
         [self sendResultEventWithCallbackId:_cbId dataDict:(NSDictionary *)resp errDict:nil doDelete:YES];
+    }
+}
+
+- (void)onBeeCloudBaidu:(NSString *)url {
+
+    BaiduViewController *bd = [[BaiduViewController alloc] init];
+    bd.url = url;
+    bd.delegate = self;
+    bd.view.frame = self.viewController.view.frame;
+    
+    [self.viewController.navigationController pushViewController:bd animated:YES];
+}
+
+- (void)showBaiduPayResult:(NSDictionary *)result {
+    if (_cbId >= 0) {
+        [self sendResultEventWithCallbackId:_cbId dataDict:(NSDictionary *)result errDict:nil doDelete:YES];
     }
 }
 
 - (id)initWithUZWebView:(UZWebView *)webView_ {
     if (self = [super initWithUZWebView:webView_]) {
         [theApp addAppHandle:self];
-        [BCPay setBCApiDelegate:self];
+        [BCPay setBeeCloudDelegate:self];
     }
     return self;
 }
@@ -75,15 +92,20 @@
     NSString *wxAppid = [feature stringValueForKey:kKeyUrlScheme defaultValue:nil];
     
     if (bcAppid.isValid) {
-        [BCPay initWithAppID:bcAppid andAppSecret:@""];
+        [BCPay initWithAppID:bcAppid];
     }
     if (wxAppid.isValid) {
         [BCPay initWeChatPay:wxAppid];
     }
+    
 }
 
 #pragma mark - UIApplicationDelegate
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+     return [BCPay handleOpenUrl:url];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
      return [BCPay handleOpenUrl:url];
 }
 

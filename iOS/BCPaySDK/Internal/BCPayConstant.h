@@ -11,7 +11,7 @@
 #ifndef BCPaySDK_BCPayConstant_h
 #define BCPaySDK_BCPayConstant_h
 
-static NSString * const kApiVersion = @"1.1.0";//api版本号
+static NSString * const kApiVersion = @"1.2.0";//api版本号
 
 static NSString * const kNetWorkError = @"网络请求失败";
 static NSString * const kKeyResponseResultCode = @"result_code";
@@ -64,31 +64,17 @@ typedef NS_ENUM(NSInteger, BCPayUrlType) {
     BCPayUrlAlipay
 };
 
-typedef NS_ENUM(NSInteger, PayChannel) {
-    PayChannelUnDefined = 0,
-    
-    PayChannelWx = 10, //微信
-    PayChannelWxApp,//微信APP
-    PayChannelWxNative,//微信扫码
-    PayChannelWxJsApi,//微信JSAPI(H5)
-    
-    PayChannelAli = 20,//支付宝
-    PayChannelAliApp,//支付宝APP
-    PayChannelAliWeb,//支付宝网页即时到账
-    PayChannelAliWap,//支付宝手机网页
-    PayChannelAliQrCode,//支付宝扫码即时到帐
-    PayChannelAliOfflineQrCode,//支付宝线下扫码
-    
-    PayChannelUn = 30,//银联
-    PayChannelUnApp,//银联APP
-    PayChannelUnWeb//银联网页
-};
+static NSString * const PayChannelWxApp = @"WX_APP";//微信APP
+static NSString * const PayChannelAliApp = @"ALI_APP";//支付宝APP
+static NSString * const PayChannelUnApp = @"UN_APP";//银联APP
+static NSString * const PayChannelBaiduWap = @"BD_WAP";
+static NSString * const PayChannelBaiduApp = @"BD_APP";
 
 enum  BCErrCode {
     BCSuccess           = 0,    /**< 成功    */
     BCErrCodeCommon     = -1,   /**< 参数错误类型    */
     BCErrCodeUserCancel = -2,   /**< 用户点击取消并返回    */
-    BCErrCodeFail   = -3,       /**< 发送失败    */
+    BCErrCodeFail       = -3,   /**< 发送失败    */
     BCErrCodeUnsupport  = -4,   /**< BeeCloud不支持 */
 };
 

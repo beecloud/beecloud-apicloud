@@ -31,39 +31,15 @@
 
 + (NSMutableDictionary *)prepareParametersForPay {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-   // NSNumber *timeStamp = [NSNumber numberWithLongLong:[BCPayUtil dateToMillisecond:[NSDate date]]];
-   // NSString *appSign = [BCPayUtil getAppSignature:[NSString stringWithFormat:@"%@",timeStamp]];
-    
     if([BCPayCache sharedInstance].appId.isValid) {
         [parameters setObject:[BCPayCache sharedInstance].appId forKey:@"app_id"];
-//        [parameters setObject:timeStamp forKey:@"timestamp"];
-//        [parameters setObject:appSign forKey:@"app_sign"];
         return parameters;
     }
     return nil;
 }
 
-+ (NSString *)getAppSignature:(NSString *)timeStamp {
-    NSString *appid = [BCPayCache sharedInstance].appId;
-    NSString *appsecret = [BCPayCache sharedInstance].appSecret;
-    
-    if (![BCPayUtil isValidString:appid] || ![BCPayUtil isValidString:appsecret])
-        return nil;
-    
-    NSString *input = [appid stringByAppendingString:timeStamp];
-    input = [input stringByAppendingString:appsecret];
-    const char* str = [input UTF8String];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(str, (CC_LONG)strlen(str), result);
-    NSMutableString *ret = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];
-    for(int i = 0; i<CC_MD5_DIGEST_LENGTH; i++) {
-        [ret appendFormat:@"%02x",result[i]];
-    }
-    return ret;
-}
-
 + (NSString *)getBestHostWithFormat:(NSString *)format {
-    NSString *verHost = [NSString stringWithFormat:@"%@%@",kBCHosts[arc4random()%kBCHostCount],reqApiVersion]; //2015.07.28
+    NSString *verHost = [NSString stringWithFormat:@"%@%@",kBCHosts[arc4random()%kBCHostCount],reqApiVersion];
     return [NSString stringWithFormat:format, verHost];
 }
 

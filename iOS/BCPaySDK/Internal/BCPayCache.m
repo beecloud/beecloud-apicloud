@@ -19,7 +19,6 @@
         instance = [[BCPayCache alloc] init];
         
         instance.appId = nil;
-        instance.appSecret = nil;
         
         instance.payPalClientID = nil;
         instance.payPalSecret = nil;
