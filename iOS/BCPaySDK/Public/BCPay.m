@@ -350,7 +350,7 @@
         } else if (!req.totalfee.isValid || !req.totalfee.isPureInt) {
             [self doErrorResponse:kKeyCheckParamsFail errDetail:@"totalfee 以分为单位，必须是整数"];
             return NO;
-        } else if (!req.billno.isPureInt || (!req.billno.isValidTraceNo) || (req.billno.length < 8) || (req.billno.length > 32)) {
+        } else if (!req.billno.isValidTraceNo || (req.billno.length < 8) || (req.billno.length > 32)) {
             [self doErrorResponse:kKeyCheckParamsFail errDetail:@"billno 必须是长度8~32位字母和/或数字组合成的字符串"];
             return NO;
         } else if ((req.channel == PayChannelAliApp) && !req.scheme.isValid) {
