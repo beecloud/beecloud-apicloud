@@ -90,6 +90,7 @@
     NSDictionary *feature = [theApp getFeatureByName:kKeyMoudleName];
     NSString *bcAppid = [feature stringValueForKey:kKeyBCAppID defaultValue:nil];
     NSString *wxAppid = [feature stringValueForKey:kKeyUrlScheme defaultValue:nil];
+    [BCPayCache sharedInstance].sandbox = [feature boolValueForKey:kKeySandbox defaultValue:NO];
     
     if (bcAppid.isValid) {
         [BCPay initWithAppID:bcAppid];

@@ -19,17 +19,17 @@
         instance = [[BCPayCache alloc] init];
         
         instance.appId = nil;
-        
-        instance.payPalClientID = nil;
-        instance.payPalSecret = nil;
-        
-        instance.isPayPalSandBox = NO;
+        instance.sandbox = NO;
         
         instance.networkTimeout = 5.0;
         instance.willPrintLogMsg = NO;
         
     });
     return instance;
+}
+
++ (BOOL)currentMode {
+    return [BCPayCache sharedInstance].sandbox;
 }
 
 @end

@@ -22,6 +22,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		36611E581C28EACE002D8611 /* BaiduViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 36611E541C28EACE002D8611 /* BaiduViewController.h */; };
+		36611E591C28EACE002D8611 /* BaiduViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36611E551C28EACE002D8611 /* BaiduViewController.m */; };
+		36611E5A1C28EACE002D8611 /* PaySandBoxViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 36611E561C28EACE002D8611 /* PaySandBoxViewController.h */; };
+		36611E5B1C28EACE002D8611 /* PaySandBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36611E571C28EACE002D8611 /* PaySandBoxViewController.m */; };
 		368275051B9D573C003F9638 /* BeeCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274A21B9D573C003F9638 /* BeeCloud.h */; };
 		368275061B9D573C003F9638 /* BeeCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274A31B9D573C003F9638 /* BeeCloud.m */; };
 		368275071B9D573C003F9638 /* NSDictionaryUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274A51B9D573C003F9638 /* NSDictionaryUtils.h */; };
@@ -95,8 +99,6 @@
 		368275561B9D573C003F9638 /* NSString+IsValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 368275011B9D573C003F9638 /* NSString+IsValid.m */; };
 		368275571B9D573C003F9638 /* BCPay.h in Headers */ = {isa = PBXBuildFile; fileRef = 368275031B9D573C003F9638 /* BCPay.h */; };
 		368275581B9D573C003F9638 /* BCPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 368275041B9D573C003F9638 /* BCPay.m */; };
-		36912DB11BF33F4700FBFBF7 /* BaiduViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 36912DAF1BF33F4700FBFBF7 /* BaiduViewController.h */; };
-		36912DB21BF33F4700FBFBF7 /* BaiduViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36912DB01BF33F4700FBFBF7 /* BaiduViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +125,10 @@
 
 /* Begin PBXFileReference section */
 		364BC4D41B5502C700EAFCCE /* libBeeCloud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBeeCloud.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		36611E541C28EACE002D8611 /* BaiduViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduViewController.h; sourceTree = "<group>"; };
+		36611E551C28EACE002D8611 /* BaiduViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduViewController.m; sourceTree = "<group>"; };
+		36611E561C28EACE002D8611 /* PaySandBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaySandBoxViewController.h; sourceTree = "<group>"; };
+		36611E571C28EACE002D8611 /* PaySandBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaySandBoxViewController.m; sourceTree = "<group>"; };
 		368274A21B9D573C003F9638 /* BeeCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeeCloud.h; sourceTree = "<group>"; };
 		368274A31B9D573C003F9638 /* BeeCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeeCloud.m; sourceTree = "<group>"; };
 		368274A51B9D573C003F9638 /* NSDictionaryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryUtils.h; sourceTree = "<group>"; };
@@ -197,8 +203,6 @@
 		368275011B9D573C003F9638 /* NSString+IsValid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+IsValid.m"; sourceTree = "<group>"; };
 		368275031B9D573C003F9638 /* BCPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCPay.h; sourceTree = "<group>"; };
 		368275041B9D573C003F9638 /* BCPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCPay.m; sourceTree = "<group>"; };
-		36912DAF1BF33F4700FBFBF7 /* BaiduViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaiduViewController.h; path = BCPaySDK/BaiduViewController.h; sourceTree = SOURCE_ROOT; };
-		36912DB01BF33F4700FBFBF7 /* BaiduViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaiduViewController.m; path = BCPaySDK/BaiduViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +232,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		36611E531C28EACE002D8611 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				36611E541C28EACE002D8611 /* BaiduViewController.h */,
+				36611E551C28EACE002D8611 /* BaiduViewController.m */,
+				36611E561C28EACE002D8611 /* PaySandBoxViewController.h */,
+				36611E571C28EACE002D8611 /* PaySandBoxViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		368274A01B9D573C003F9638 /* BCPaySDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,8 +259,6 @@
 		368274A11B9D573C003F9638 /* APICloud */ = {
 			isa = PBXGroup;
 			children = (
-				36912DAF1BF33F4700FBFBF7 /* BaiduViewController.h */,
-				36912DB01BF33F4700FBFBF7 /* BaiduViewController.m */,
 				368274A21B9D573C003F9638 /* BeeCloud.h */,
 				368274A31B9D573C003F9638 /* BeeCloud.m */,
 				368274A41B9D573C003F9638 /* UZEngine */,
@@ -402,6 +415,7 @@
 		368274F91B9D573C003F9638 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				36611E531C28EACE002D8611 /* ViewController */,
 				368274FA1B9D573C003F9638 /* BCPayCache.h */,
 				368274FB1B9D573C003F9638 /* BCPayCache.m */,
 				368274FC1B9D573C003F9638 /* BCPayConstant.h */,
@@ -437,6 +451,7 @@
 				368275321B9D573C003F9638 /* AFURLConnectionOperation.h in Headers */,
 				368275051B9D573C003F9638 /* BeeCloud.h in Headers */,
 				3682751F1B9D573C003F9638 /* BCRefundStatusResp.h in Headers */,
+				36611E5A1C28EACE002D8611 /* PaySandBoxViewController.h in Headers */,
 				3682752B1B9D573C003F9638 /* AFHTTPSessionManager.h in Headers */,
 				368275131B9D573C003F9638 /* BCQueryRefundReq.h in Headers */,
 				368275411B9D573C003F9638 /* SBJsonBase.h in Headers */,
@@ -445,7 +460,7 @@
 				368275301B9D573C003F9638 /* AFSecurityPolicy.h in Headers */,
 				3682750B1B9D573C003F9638 /* BCBaseReq.h in Headers */,
 				3682751D1B9D573C003F9638 /* BCQueryResp.h in Headers */,
-				36912DB11BF33F4700FBFBF7 /* BaiduViewController.h in Headers */,
+				36611E581C28EACE002D8611 /* BaiduViewController.h in Headers */,
 				368275231B9D573C003F9638 /* BCQueryBillResult.h in Headers */,
 				368275431B9D573C003F9638 /* SBJsonWriter.h in Headers */,
 				3682752E1B9D573C003F9638 /* AFNetworkReachabilityManager.h in Headers */,
@@ -576,13 +591,14 @@
 				368275181B9D573C003F9638 /* BCRefundStatusReq.m in Sources */,
 				368275061B9D573C003F9638 /* BeeCloud.m in Sources */,
 				368275201B9D573C003F9638 /* BCRefundStatusResp.m in Sources */,
-				36912DB21BF33F4700FBFBF7 /* BaiduViewController.m in Sources */,
+				36611E591C28EACE002D8611 /* BaiduViewController.m in Sources */,
 				3682751E1B9D573C003F9638 /* BCQueryResp.m in Sources */,
 				368275221B9D573C003F9638 /* BCBaseResult.m in Sources */,
 				368275561B9D573C003F9638 /* NSString+IsValid.m in Sources */,
 				368275311B9D573C003F9638 /* AFSecurityPolicy.m in Sources */,
 				368275161B9D573C003F9638 /* BCQueryReq.m in Sources */,
 				3682752A1B9D573C003F9638 /* AFHTTPRequestOperationManager.m in Sources */,
+				36611E5B1C28EACE002D8611 /* PaySandBoxViewController.m in Sources */,
 				3682751A1B9D573C003F9638 /* BCBaseResp.m in Sources */,
 				368275371B9D573C003F9638 /* AFURLResponseSerialization.m in Sources */,
 			);
