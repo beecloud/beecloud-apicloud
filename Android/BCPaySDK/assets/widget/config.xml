@@ -1,0 +1,18 @@
+<widget id="A6984815350967"  version="0.0.1">
+    <name>BeeCloud Pay</name>
+    <description>
+       sample BeeCloud Pay app
+    </description>
+    <author email="david@beecloud.com" href="https://beecloud.cn/">
+        developer
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="bounces" value="true" />
+    
+    <feature name="beecloud">
+        <param name="bcAppID" value="c5d1cba1-5e3f-4ba0-941d-9b0a371fe719" />
+        <param name="sandbox" value="true" />
+        <param name="urlScheme" value="wx19433a59b15fe84d" />
+    </feature>
+</widget>

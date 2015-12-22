@@ -59,8 +59,6 @@ public class BCPayReqParams extends BCReqParams {
         Map<String, Object> params = new HashMap<String, Object>(8);
 
         params.put("app_id", getAppId());
-        params.put("timestamp", getTimestamp());
-        params.put("app_sign", getAppSign());
         params.put("channel", channel);
         params.put("total_fee", totalFee);
         params.put("bill_no", billNum);

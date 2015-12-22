@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=0">
+    <title>BeeCloud</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+
+    <style type="text/css">
+	    .paybutton{
+	    	width: 100px;  
+		    height: 60px;  
+		    background-color: #F38630;  
+		    color: #FFFFFF;  
+		    border-radius: 5px;  
+		    border: 4px solid #FA6900;  
+		    font-family: Verdana, Arial, Sans-Serif;  
+		    font-size: 1em;  
+		    font-weight: bold;  
+		    text-align: center;  
+		    box-shadow: 5px 5px 5px #888;  
+		    display: inline-block;  
+	    	margin-right: 20px;  
+	    }
+
+	</style>
+
+    <script type="text/javascript">
+
+    function guid() {
+	  function s4() {
+	    return Math.floor((1 + Math.random()) * 0x10000)
+	      .toString(16)
+	      .substring(1);
+	  }
+	  return s4() + s4() + s4() + s4() + s4();
+	}
+
+		var uzmodule = null;
+		apiready = function(){
+	    	bcPay = api.require('beecloud');
+	    }
+	    
+		function reqWXPay(){
+			var params = {
+			    channel: "WX_APP",
+			    title: "测试通过APICloud微信调用",
+			    totalfee: 1,
+			    billno: guid(),
+			    optional: {'optionalKey1':'optionalValue1', 'optionalKey2':'optionalValue2'}
+			};
+	        bcPay.pay(params, function(ret, err) {
+	        	//alert(err);
+	        	//alert(JSON.stringify(ret));
+	        	if (ret.result_code == 0){
+	        		alert("支付成功")
+	        	} else {
+	        		alert("支付失败，原因：" + ret.result_code + "---" + ret.result_msg 
+	        			+ "---" + ret.err_detail)
+	        	}
+			});
+		}
+
+		function getversion() {
+			bcPay.getApiVersion(function(ret, err) {
+	        	alert("ret = " + JSON.stringify(ret) + "err = " + JSON.stringify(err));
+			});
+		}
+
+		function reqAliPay(){
+			var params = {
+			    channel: "ALI_APP",
+			    title: "测试通过APICloud支付宝调用",
+			    totalfee: 1,
+			    billno: guid(),
+			    optional: {'optionalKey1':'optionalValue1', 'optionalKey2':'optionalValue2'}
+			};
+	        bcPay.pay(params, function(ret, err) {
+	        	//alert(err);
+	        	//alert(JSON.stringify(ret));
+	        	if (ret.result_code == 0){
+	        		alert("支付成功")
+	        	} else {
+	        		alert("支付失败，原因：" + ret.result_code + "---" + ret.result_msg 
+	        			+ "---" + ret.err_detail)
+	        	}
+			});
+		}
+
+		function reqUNPay(){
+			var params = {
+			    channel: "UN_APP",
+			    title: "测试通过APICloud银联调用",
+			    totalfee: 1,
+			    billno: guid(),
+			    optional: {'optionalKey1':'optionalValue1', 'optionalKey2':'optionalValue2'}
+			};
+	        bcPay.pay(params, function(ret, err) {
+	        	//alert(err);
+	        	//alert(JSON.stringify(ret));
+	        	if (ret.result_code == 0){
+	        		alert("支付成功")
+	        	} else {
+	        		if (ret.result_code == -5){
+	        			alert("需要安装银联插件")
+	        		} else {
+						alert("支付失败，原因：" + ret.result_code + "---" + ret.result_msg 
+	        				+ "---" + ret.err_detail)
+	        		}
+	        	}
+			});
+		}
+    
+    	function reqBDPay(){
+			var params = {
+			    channel: "BD_APP",
+			    title: "测试通过APICloud百度调用",
+			    totalfee: 1,
+			    billno: guid(),
+			    optional: {'key恩':'值1', 'optionalKey2':'optionalValue2'}
+			};
+	        bcPay.pay(params, function(ret, err) {
+	        	//alert(err);
+	        	//alert(JSON.stringify(ret));
+	        	if (ret.result_code == 0){
+	        		alert("支付成功")
+	        	} else {
+	        		alert("支付失败，原因：" + ret.result_code + "---" + ret.result_msg 
+	        			+ "---" + ret.err_detail)
+	        	}
+			});
+		}
+
+	</script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="main"> 
+            <div>
+            	<input type="button" class="paybutton" onclick="reqWXPay()" value="微信支付" /><br><br>
+            	<input type="button" class="paybutton" onclick="reqAliPay()" value="支付宝支付" /><br><br>
+            	<input type="button" class="paybutton" onclick="reqUNPay()" value="银联支付" /><br><br>
+            	<input type="button" class="paybutton" onclick="reqBDPay()" value="百度支付" /><br><br>
+            	<input type="button" class="paybutton" onclick="getversion()" value="version" />
+            </div>
+
+        </div>   
+    </div>
+</body>
+</html>

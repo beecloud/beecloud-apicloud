@@ -1,0 +1,8 @@
+{
+	modules:[
+		{
+		    name:'beecloud',
+		    class:'cn.beecloud.BCPay'
+		},
+	]
+}

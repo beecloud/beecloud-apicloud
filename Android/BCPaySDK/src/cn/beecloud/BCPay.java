@@ -11,6 +11,9 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.alipay.sdk.app.PayTask;
+import com.baidu.android.pay.PayCallBack;
+import com.baidu.paysdk.PayCallBackManager;
+import com.baidu.paysdk.api.BaiduPay;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tencent.mm.sdk.constants.Build;
@@ -21,13 +24,8 @@ import com.uzmap.pkg.uzcore.UZWebView;
 import com.uzmap.pkg.uzcore.annotation.UzJavascriptMethod;
 import com.uzmap.pkg.uzcore.uzmodule.UZModule;
 import com.uzmap.pkg.uzcore.uzmodule.UZModuleContext;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,16 +33,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cn.beecloud.BCHttpClientUtil.Response;
 import cn.beecloud.entity.BCPayReqParams;
 import cn.beecloud.entity.BCPayResult;
 
-/**
- * 支付类
- * 单例模式
- */
 public class BCPay extends UZModule {
 
-	public static final String apiVersion = "1.0.0";
+	public static final String apiVersion = "1.3.0";
 			
     static UZModuleContext moduleContext;
     
@@ -52,9 +47,12 @@ public class BCPay extends UZModule {
 		super(webView);
 		moduleContext=null;
 		
-		BeeCloud.setAppIdAndSecret(this.getFeatureValue("beecloud", "bcAppID"), 
-				this.getFeatureValue("beecloud", "bcAppSecret"));
+		BeeCloud.setAppId(this.getFeatureValue("beecloud", "bcAppID"));
 		
+		String sandbox = this.getFeatureValue("beecloud", "sandbox");
+		if (sandbox != null && sandbox.equals("true")) {
+			BeeCloud.setSandbox(true);
+		}
     	initWechatPay(this.getContext(), 
     			this.getFeatureValue("beecloud", "urlScheme"));
 	}
@@ -230,49 +228,51 @@ public class BCPay extends UZModule {
 
                 String payURL = BCHttpClientUtil.getBillPayURL();
 
-                HttpResponse response = BCHttpClientUtil.httpPost(payURL, parameters.transToBillReqMapParams());
+                Response response = BCHttpClientUtil.httpPost(payURL, parameters.transToBillReqMapParams());
                 
                 if (null == response) {
                 	jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "网络请求失败", "网络请求失败");
                     return;
                 }
-                if (response.getStatusLine().getStatusCode() == 200) {
+                if (response.code == 200) {
                     String serverRet;
-                    try {
-                    	serverRet = EntityUtils.toString(response.getEntity(), "UTF-8");
+                    serverRet = response.content;
 
-                    	Gson res = new Gson();
+					Gson res = new Gson();
 
-                        Type type = new TypeToken<Map<String,Object>>() {}.getType();
-                        Map<String, Object> responseMap = res.fromJson(serverRet, type);
+					Type type = new TypeToken<Map<String,Object>>() {}.getType();
+					Map<String, Object> responseMap = res.fromJson(serverRet, type);
 
-                        //判断后台返回结果
-                        Double resultCode = (Double) responseMap.get("result_code");
-                        if (resultCode == 0) {
-
-                            //针对不同的支付渠道调用不同的API
-							if (channelType.equals("WX_APP")){
-								reqWXPaymentViaAPP(responseMap);
-							} else if (channelType.equals("ALI_APP")) {
-								reqAliPaymentViaAPP(responseMap);
-							} else if (channelType.equals("UN_APP")) {
-								reqUnionPaymentViaAPP(responseMap);
-							}
-							else {
-								jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "参数检查出错",
-										"channel渠道不支持");
-							}
-                        } else {
-                            //返回后端传回的错误信息
-                        	
-                        	jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "服务端返回错误信息", 
-                        			serverRet);
+					//判断后台返回结果
+					Double resultCode = (Double) responseMap.get("result_code");
+					if (resultCode == 0) {
+						BCCache.getInstance().billID = (String)responseMap.get("id");
+						
+						//如果是测试模式
+                        if (BCCache.getInstance().isTestMode) {
+                            reqTestModePayment(billTitle, billTotalFee);
+                            return;
                         }
-
-                    } catch (IOException e) {                    	
-                    	jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "网络请求失败", 
-                    			"网络请求失败");
-                    }
+                        
+					    //针对不同的支付渠道调用不同的API
+						if (channelType.equals("WX_APP")){
+							reqWXPaymentViaAPP(responseMap);
+						} else if (channelType.equals("ALI_APP")) {
+							reqAliPaymentViaAPP(responseMap);
+						} else if (channelType.equals("UN_APP")) {
+							reqUnionPaymentViaAPP(responseMap);
+						} else if (channelType.equals("BD_APP")) {
+							reqBaiduPaymentViaAPP(responseMap);
+						}else {
+							jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "参数检查出错",
+									"channel渠道不支持");
+						}
+					} else {
+					    //返回后端传回的错误信息
+						
+						jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "服务端返回错误信息", 
+								serverRet);
+					}
                 } else {
                 	jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "网络请求失败", 
                 			"网络请求失败");
@@ -296,13 +296,26 @@ public class BCPay extends UZModule {
     	moduleContext.success(ret, true);
     }
 
+    private void reqTestModePayment(String billTitle, Integer billTotalFee) {
+        Intent intent = new Intent(moduleContext.getContext(), BCMockPayActivity.class);
+        intent.putExtra("id", BCCache.getInstance().billID);
+        intent.putExtra("billTitle", billTitle);
+        intent.putExtra("billTotalFee", billTotalFee);
+        startActivity(intent);
+    }
+    
     /**
      * 与服务器交互后下一步进入微信app支付
      *
      * @param responseMap     服务端返回参数
      */
     private void reqWXPaymentViaAPP(final Map<String, Object> responseMap) {
-
+    	if (wxAPI == null || !isWXPaySupported()) {
+    		jsCallback(BCPayResult.BC_ERR_CODE_COMMON, 
+    				"参数检查出错", "未找到微信客户端，请先下载安装");
+    		return;
+    	}
+    	
         //获取到服务器的订单参数后，以下主要代码即可调起微信支付。
         PayReq request = new PayReq();
         request.appId = String.valueOf(responseMap.get("app_id"));
@@ -316,7 +329,7 @@ public class BCPay extends UZModule {
         if (wxAPI != null) {
             wxAPI.sendReq(request);
         } else {
-        	jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "参数异常", 
+        	jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "参数检查出错", 
         			"Error: 微信API为空, 需要初始化");
         }
     }
@@ -350,12 +363,12 @@ public class BCPay extends UZModule {
             errMsg = BCPayResult.RESULT_SUCCESS;
             errDetail = BCPayResult.RESULT_SUCCESS;
         } else if (resCode.equals("6001")) {
-            result = BCPayResult.BC_CANCLE;
+            result = BCPayResult.BC_CANCEL;
             errMsg = BCPayResult.RESULT_CANCEL;
             errDetail = BCPayResult.RESULT_CANCEL;
         } else if (resCode.equals("4000") || resCode.equals("6002")){
         	result = BCPayResult.BC_ERR_FAIL;
-            errMsg = "正在处理中";
+            errMsg = BCPayResult.FAIL_ERR_FROM_CHANNEL;
             errDetail = "正在处理中";
         } else {
             result = BCPayResult.BC_ERR_CODE_COMMON;
@@ -379,5 +392,83 @@ public class BCPay extends UZModule {
         intent.setClass(moduleContext.getContext(), BCUnionPaymentActivity.class);
         intent.putExtra("tn", TN);
         moduleContext.getContext().startActivity(intent);
+    }
+    
+    /**
+     * 与服务器交互后下一步进入百度app支付
+     *
+     * @param responseMap     服务端返回参数
+     */
+    private void reqBaiduPaymentViaAPP(final Map<String, Object> responseMap) {
+        String orderInfo = (String) responseMap.get("orderInfo");
+
+        //Log.w(TAG, orderInfo);
+
+        Map<String, String> map = new HashMap<String, String>();
+        BaiduPay.getInstance().doPay(this.getContext(), orderInfo, new PayCallBack() {
+            public void onPayResult(int stateCode, String payDesc) {
+                //Log.w(TAG, "rsult=" + stateCode + "#desc=" + payDesc);
+
+                int result;
+                String errMsg;
+                String errDetail;
+
+                switch (stateCode) {
+                    case PayCallBackManager.PayStateModle.PAY_STATUS_SUCCESS:// 需要到服务端验证支付结果
+
+                        result = BCPayResult.BC_SUCC;
+                        errMsg = BCPayResult.RESULT_SUCCESS;
+                        errDetail = errMsg;
+                        break;
+                    case PayCallBackManager.PayStateModle.PAY_STATUS_PAYING:// 需要到服务端验证支付结果
+                        result = BCPayResult.BC_ERR_FAIL;
+                        errMsg = BCPayResult.FAIL_ERR_FROM_CHANNEL;
+                        errDetail = "订单正在处理中，无法获取成功确认信息";
+                        break;
+                    case PayCallBackManager.PayStateModle.PAY_STATUS_CANCEL:
+                        result = BCPayResult.BC_CANCEL;
+                        errMsg = BCPayResult.RESULT_CANCEL;
+                        errDetail = errMsg;
+                        break;
+                    case PayCallBackManager.PayStateModle.PAY_STATUS_NOSUPPORT:
+                        result = BCPayResult.BC_ERR_CODE_COMMON;
+                        errMsg = BCPayResult.FAIL_ERR_FROM_CHANNEL;
+                        errDetail = "不支持该种支付方式";
+                        break;
+                    case PayCallBackManager.PayStateModle.PAY_STATUS_TOKEN_INVALID:
+                        result = BCPayResult.BC_ERR_CODE_COMMON;
+                        errMsg = BCPayResult.FAIL_ERR_FROM_CHANNEL;
+                        errDetail = "无效的登陆状态";
+                        break;
+                    case PayCallBackManager.PayStateModle.PAY_STATUS_LOGIN_ERROR:
+                        result = BCPayResult.BC_ERR_CODE_COMMON;
+                        errMsg = BCPayResult.FAIL_ERR_FROM_CHANNEL;
+                        errDetail = "登陆失败";
+                        break;
+                    case PayCallBackManager.PayStateModle.PAY_STATUS_ERROR:
+                        result = BCPayResult.BC_ERR_FAIL;
+                        errMsg = BCPayResult.FAIL_ERR_FROM_CHANNEL;
+                        errDetail = "支付失败";
+                        break;
+                    case PayCallBackManager.PayStateModle.PAY_STATUS_LOGIN_OUT:
+                        result = BCPayResult.BC_ERR_CODE_COMMON;
+                        errMsg = BCPayResult.FAIL_ERR_FROM_CHANNEL;
+                        errDetail = "退出登录";
+                        break;
+                    default:
+                        result = BCPayResult.BC_ERR_FAIL;
+                        errMsg = BCPayResult.FAIL_ERR_FROM_CHANNEL;
+                        errDetail = "支付失败";
+                        break;
+                }
+                	
+                jsCallback(result, errMsg, errDetail);
+            }
+
+            public boolean isHideLoadingDialog() {
+                return true;
+            }
+        }, map);
+
     }
 }

@@ -6,11 +6,8 @@
  */
 package cn.beecloud.entity;
 
-import java.util.Date;
-
 import cn.beecloud.BCCache;
 import cn.beecloud.BCException;
-import cn.beecloud.BCMD5Util;
 
 /**
  * 向服务端请求的基类
@@ -21,14 +18,6 @@ public class BCReqParams {
     //BeeCloud应用APPID
     //BeeCloud的唯一标识
     private String appId;
-
-    //签名生成时间
-    //时间戳, 毫秒数
-    private Long timestamp;
-
-    //加密签名
-    //算法: md5(app_id+timestamp+app_secret), 32位16进制格式, 不区分大小写
-    private String appSign;
 
     /**
      * 渠道类型
@@ -59,7 +48,12 @@ public class BCReqParams {
         /**
          * 银联手机原生APP支付
          */
-        UN_APP;
+        UN_APP,
+        
+        /**
+         * 百度手机原生APP支付
+         */
+        BD_APP;
 
         /**
          * 判断是否为有效的app端支付渠道类型
@@ -70,7 +64,8 @@ public class BCReqParams {
         public static boolean isValidAPPPaymentChannelType(String channel) {
             return channel.equals(WX_APP.name()) ||
                     channel.equals(ALI_APP.name()) ||
-                    channel.equals(UN_APP.name());
+                    channel.equals(UN_APP.name()) ||
+                    channel.contains(BD_APP.name());
         }
 
     }
@@ -84,22 +79,6 @@ public class BCReqParams {
     }
 
     /**
-     * 时间戳, 毫秒数
-     * @return  签名生成时间
-     */
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    /**
-     * 算法: md5(app_id+timestamp+app_secret), 32位16进制格式, 不区分大小写
-     * @return  加密签名
-     */
-    public String getAppSign() {
-        return appSign;
-    }
-
-    /**
      * 初始化参数
      * @param channel   渠道类型
      * @param reqType   请求类型
@@ -110,13 +89,10 @@ public class BCReqParams {
 
         BCCache mCache = BCCache.getInstance();
 
-        if (mCache.appId == null || mCache.appSecret == null) {
-            throw new BCException("parameters: 请通过BeeCloud初始化appId和appSecret");
+        if (mCache.appId == null) {
+            throw new BCException("parameters: 请通过BeeCloud初始化appId");
         } else {
             appId = mCache.appId;
-            timestamp = (new Date()).getTime();
-            appSign = BCMD5Util.getMessageDigest(appId +
-                    timestamp + mCache.appSecret);
             this.channel = channel;
         }
     }

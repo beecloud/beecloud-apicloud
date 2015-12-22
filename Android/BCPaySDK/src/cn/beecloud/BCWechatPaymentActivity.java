@@ -88,7 +88,7 @@ public class BCWechatPaymentActivity extends Activity implements IWXAPIEventHand
             	errDetail = errMsg;
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
-            	resultCode = BCPayResult.BC_CANCLE;
+            	resultCode = BCPayResult.BC_CANCEL;
             	errMsg = BCPayResult.RESULT_CANCEL;
             	errDetail = errMsg;
                 break;

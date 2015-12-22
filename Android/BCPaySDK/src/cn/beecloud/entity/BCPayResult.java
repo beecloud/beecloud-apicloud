@@ -24,7 +24,7 @@ public class BCPayResult implements BCResult {
     //result code
     public static int BC_SUCC = 0;
     public static int BC_ERR_CODE_COMMON = -1;
-    public static int BC_CANCLE = -2;
+    public static int BC_CANCEL = -2;
     public static int BC_ERR_FAIL = -3;
     public static int BC_ERR_UNSUPPORT = -4;
     public static int BC_ERR_PLUGIN_ISSUE = -5;
