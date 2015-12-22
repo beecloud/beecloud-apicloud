@@ -22,20 +22,11 @@
 @property (nonatomic, strong) NSString *appId;
 
 /**
- *  PayPal client ID
+ *  YES 表示当前是沙箱环境，不产生真实的交易
+ *  NO  表示当前是生产环境，产生真实的交易
+ *  默认是生产环境
  */
-@property (nonatomic, strong) NSString *payPalClientID;
-
-/**
- *  PayPal secret
- */
-@property (nonatomic, strong) NSString *payPalSecret;
-
-/**
- *  PayPal SandBox Client ID
- */
-@property (nonatomic, assign) BOOL isPayPalSandBox;
-
+@property (nonatomic, assign) BOOL sandbox;
 
 /**
  *  Default network timeout in seconds for all network requests. Change this value via [BeeCloud setNetworkTimeout:];
@@ -53,5 +44,12 @@
  *  @return BCCache shared instance.
  */
 + (instancetype)sharedInstance;
+
+/**
+ *  获取当前环境模式
+ *
+ *  @return YES代表沙箱测试环境；NO代表生产环境。
+ */
++ (BOOL)currentMode;
 
 @end

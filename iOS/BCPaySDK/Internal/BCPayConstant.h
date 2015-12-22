@@ -11,7 +11,7 @@
 #ifndef BCPaySDK_BCPayConstant_h
 #define BCPaySDK_BCPayConstant_h
 
-static NSString * const kApiVersion = @"1.2.0";//api版本号
+static NSString * const kApiVersion = @"1.3.0";//api版本号
 
 static NSString * const kNetWorkError = @"网络请求失败";
 static NSString * const kKeyResponseResultCode = @"result_code";
@@ -22,11 +22,8 @@ static NSString * const kKeyCheckParamsFail = @"参数检查出错";
 
 static NSString * const kKeyMoudleName = @"beecloud";
 static NSString * const kKeyBCAppID = @"bcAppID";
-static NSString * const kKeyBCAppSecret = @"bcAppSecret";
+static NSString * const kKeySandbox = @"sandbox";
 static NSString * const kKeyUrlScheme = @"urlScheme";
-static NSString * const kKeyPayPalClientID = @"payPalClientId";
-static NSString * const kKeyPayPalSecret = @"payPalSecret";
-static NSString * const kKeyPayPalSandBox = @"payPalSandBox";
 
 static NSUInteger const kBCHostCount = 4;
 static NSString * const kBCHosts[] = {@"https://apisz.beecloud.cn",
@@ -34,17 +31,16 @@ static NSString * const kBCHosts[] = {@"https://apisz.beecloud.cn",
     @"https://apibj.beecloud.cn",
     @"https://apihz.beecloud.cn"};
 
-static NSString * const reqApiVersion = @"/1";
+static NSString * const reqApiVersion = @"/2/rest";
 
 //rest api
-static NSString * const kRestApiPay = @"%@/rest/app/bill";
+static NSString * const kRestApiPay = @"%@%@/app/bill";
 static NSString * const kRestApiQueryBills = @"%@/rest/bills";
 static NSString * const kRestApiQueryRefunds = @"%@/rest/refunds";
 static NSString * const kRestApiRefundState = @"%@/rest/refund/status";
 
-//paypal accesstoken
-static NSString * const kPayPalAccessTokenProduction = @"https://api.paypal.com/v1/oauth2/token";
-static NSString * const kPayPalAccessTokenSandBox = @"https://api.sandbox.paypal.com/v1/oauth2/token";
+//sandbox
+static NSString * const kRestApiSandboxNotify = @"%@%@/notify/";
 
 /**
  *  BCPay URL type for handling URLs.
@@ -70,7 +66,7 @@ static NSString * const PayChannelUnApp = @"UN_APP";//银联APP
 static NSString * const PayChannelBaiduWap = @"BD_WAP";
 static NSString * const PayChannelBaiduApp = @"BD_APP";
 
-enum  BCErrCode {
+typedef NS_ENUM(NSInteger, BCErrCode) {
     BCSuccess           = 0,    /**< 成功    */
     BCErrCodeCommon     = -1,   /**< 参数错误类型    */
     BCErrCodeUserCancel = -2,   /**< 用户点击取消并返回    */

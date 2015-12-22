@@ -13,6 +13,7 @@
 #import "AlipaySDK.h"
 #import "UPPayPlugin.h"
 #import "NSDictionaryUtils.h"
+#import "PaySandBoxViewController.h"
 
 
 @interface BCPay ()<WXApiDelegate, UPPayPluginDelegate>
@@ -44,6 +45,10 @@
 
 + (void)setBeeCloudDelegate:(id<BeeCloudDelegate>)delegate {
     [BCPay sharedInstance].deleagte = delegate;
+}
+
++ (id<BeeCloudDelegate>)getBeeCloudDelegate {
+    return [BCPay sharedInstance].deleagte;
 }
 
 + (BOOL)handleOpenUrl:(NSURL *)url {
@@ -141,14 +146,26 @@
                   }
               } else {
                   NSLog(@"channel=%@,resp=%@", req.channel, response);
+                  
                   NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:
                                               (NSDictionary *)response];
-                  if ([req.channel isEqualToString: PayChannelAliApp]) {
-                      [dic setObject:req.scheme forKey:@"scheme"];
-                  } else if ([req.channel isEqualToString: PayChannelUnApp]) {
-                      [dic setObject:req.viewController forKey:@"viewController"];
+                  if ([BCPayCache currentMode]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        PaySandboxViewController *view = [[PaySandboxViewController alloc] init];
+                        view.bcId = [dic stringValueForKey:@"id" defaultValue:@""];
+                        view.req = req;
+                        [req.viewController presentViewController:view animated:YES completion:^{
+                        }];
+                    });
+                  } else {
+                      if ([req.channel isEqualToString: PayChannelAliApp]) {
+                          [dic setObject:req.scheme forKey:@"scheme"];
+                      } else if ([req.channel isEqualToString: PayChannelUnApp]) {
+                          [dic setObject:req.viewController forKey:@"viewController"];
+                      }
+                      [self doPayAction:req.channel source:dic];
                   }
-                  [self doPayAction:req.channel source:dic];
+                 
               }
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               [self doErrorResponse:kNetWorkError errDetail:kNetWorkError];
@@ -353,10 +370,10 @@
         } else if (!req.billno.isValidTraceNo || (req.billno.length < 8) || (req.billno.length > 32)) {
             [self doErrorResponse:kKeyCheckParamsFail errDetail:@"billno 必须是长度8~32位字母和/或数字组合成的字符串"];
             return NO;
-        } else if ((req.channel == PayChannelAliApp) && !req.scheme.isValid) {
+        } else if (([req.channel isEqualToString: PayChannelAliApp]) && !req.scheme.isValid) {
             [self doErrorResponse:kKeyCheckParamsFail errDetail:@"scheme 不是合法的字符串，将导致无法从支付宝钱包返回应用"];
             return NO;
-        } else if (req.channel == PayChannelWxApp && ![WXApi isWXAppInstalled]) {
+        } else if ([req.channel isEqualToString: PayChannelWxApp] && ![WXApi isWXAppInstalled] && ![BCPayCache currentMode]) {
             [self doErrorResponse:kKeyCheckParamsFail errDetail:@"未找到微信客户端，请先下载安装"];
             return NO;
         }

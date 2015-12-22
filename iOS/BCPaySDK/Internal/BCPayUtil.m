@@ -40,7 +40,8 @@
 
 + (NSString *)getBestHostWithFormat:(NSString *)format {
     NSString *verHost = [NSString stringWithFormat:@"%@%@",kBCHosts[arc4random()%kBCHostCount],reqApiVersion];
-    return [NSString stringWithFormat:format, verHost];
+    NSLog(@"host %@", verHost);
+    return [NSString stringWithFormat:format, verHost, [BCPayCache currentMode] ? @"/sandbox" : @""];
 }
 
 + (NSString *)generateRandomUUID {

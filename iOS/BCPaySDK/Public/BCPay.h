@@ -59,6 +59,13 @@
 + (void)setBeeCloudDelegate:(id<BeeCloudDelegate>)delegate;
 
 /**
+ *  BCPay Delegate
+ *
+ *  @return delegate
+ */
++ (id<BeeCloudDelegate>)getBeeCloudDelegate;
+
+/**
  *  获取API版本号
  *
  *  @return 版本号
