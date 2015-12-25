@@ -270,8 +270,8 @@ public class BCPay extends UZModule {
 					} else {
 					    //返回后端传回的错误信息
 						
-						jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "服务端返回错误信息", 
-								serverRet);
+						jsCallback(resultCode.intValue(), String.valueOf(responseMap.get("result_msg")), 
+                    			String.valueOf(responseMap.get("err_detail")));
 					}
                 } else {
                 	jsCallback(BCPayResult.BC_ERR_CODE_COMMON, "网络请求失败", 
