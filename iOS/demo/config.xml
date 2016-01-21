@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget id="A6984815350967" version="0.0.1">
+  <name>BeeCloud Pay</name>
+  <description>BeeCloud Pay.</description>
+  <author email="support@beecloud.cn" href="https://beecloud.cn">BeeCloudPay.SIR</author>
+  <content src="index.html"/>
+  <preference name="pageBounce" value="true"/>
+  <preference name="appBackground" value="rgba(0,0,0,0.0)"/>
+  <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+  <preference name="hScrollBarEnabled" value="true"/>
+  <preference name="vScrollBarEnabled" value="true"/>
+  <preference name="autoLaunch" value="true"/>
+  <preference name="fullScreen" value="false"/>
+  <preference name="autoUpdate" value="true"/>
+  <preference name="smartUpdate" value="false"/>
+  <preference name="debug" value="false"/>
+  <preference name="iOS7StatusBarAppearance" value="true"/>
+  <permission name="readPhoneState"/>
+  <permission name="call"/>
+  <permission name="sms"/>
+  <permission name="camera"/>
+  <permission name="record"/>
+  <permission name="location"/>
+  <permission name="fileSystem"/>
+  <permission name="internet"/>
+  <permission name="bootCompleted"/>
+  <permission name="hardware"/>
+  <permission name="contact"/>
+  <access origin="*"/>
+  <feature name="beecloud">
+    <param name="urlScheme" value="wxf1aa465362b4c8f1"/>
+    <param name="bcAppID" value="c37d661d-7e61-49ea-96a5-68c34e83db3b"/>
+  </feature>
+</widget>
