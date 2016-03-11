@@ -65,6 +65,10 @@
     return NO;
 }
 
++ (BOOL)isWXAppInstalled {
+    return [WXApi isWXAppInstalled];
+}
+
 + (BCPayUrlType)getUrlType:(NSURL *)url {
     if ([url.host isEqualToString:@"safepay"])
         return BCPayUrlAlipay;

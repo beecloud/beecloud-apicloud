@@ -52,6 +52,13 @@
 + (BOOL)handleOpenUrl:(NSURL *)url;
 
 /**
+ *  判断是否安装微信客户端
+ *
+ *  @return YES表示已经安装
+ */
++ (BOOL)isWXAppInstalled;
+
+/**
  *  设置接收消息的对象
  *
  *  @param delegate BeeCloudDelegate对象，用来接收BeeCloud触发的消息。

@@ -44,6 +44,16 @@
     [self sendResultEventWithCallbackId:_cbId dataDict:@{@"apiVersion":kApiVersion} errDict:nil doDelete:YES];
 }
 
+- (void)isWXAppInstalled:(NSDictionary *)paramDic {
+    _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
+    [self sendResultEventWithCallbackId:_cbId dataDict:@{@"flag":@([BCPay isWXAppInstalled])} errDict:nil doDelete:YES];
+}
+
+- (void)isSandboxMode:(NSDictionary *)paramDic {
+    _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
+    [self sendResultEventWithCallbackId:_cbId dataDict:@{@"sandbox":@([BCPayCache currentMode])} errDict:nil doDelete:YES];
+}
+
 - (NSString *)genOutTradeNo {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMddHHmmssSSS"];
