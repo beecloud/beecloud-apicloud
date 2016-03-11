@@ -28,7 +28,7 @@ h1,ul,li{ padding:0; margin:0;}
 
 <body>
 <div class="pay_info">
-  <h1><span>比可网络</span><br />¥0.01</h1>
+  <h1><span>比可网络</span><br />¥100.00</h1>
   <p>商品<span>自制白开水</span></p>
   <p>交易单号<span>161165161df1d1fasd1616165</span></p>
 </div>
@@ -36,8 +36,10 @@ h1,ul,li{ padding:0; margin:0;}
   <li onclick="doPay('WX_APP');"><i></i><span><b>微信支付</b><br>使用微信支付</span></li>
   <li onclick="doPay('ALI_APP');"><i></i><span><b>支付宝支付</b><br>使用支付宝支付</span></li>
   <li onclick="doPay('UN_APP');"><i></i><span><b>银联在线</b><br>使用银联在线支付</span></li>
-  <li onclick="doPay('BD_APP');"><i></i><span><b>百度钱包APP</b><br>百度钱包APP</span></li>
+  <li onclick="doPay('BD_WAP');"><i></i><span><b>百度钱包APP</b><br>百度钱包APP</span></li>
   <li onclick="getApiVersion();"><i></i><span><b>getApiVersion</b><br>getApiVersion</span></li>
+  <li onclick="isWXAppInstalled();"><i></i><span><b>isWXAppInstalled</b><br>isWXAppInstalled</span></li>
+  <li onclick="isSandboxMode();"><i></i><span><b>isSandboxMode</b><br>isSandboxMode</span></li>
   </ul>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -60,7 +62,7 @@ function doPay(channel) {
       var payData = {
     	title: "apicloud",
     	totalfee: 1,
-    	billno: genBillno(),
+    	billno: channel.replace("_", "") + genBillno(),
     	channel: channel,
    		optional: {'userID':'张三','mobile':'0512-86861620'} 
 	};
@@ -69,8 +71,7 @@ function doPay(channel) {
 	demo.pay(payData, payCallBack);
 	
 	function payCallBack(ret, err) {
-		//api.alert({msg:ret.result_msg});
-		alert("ret = " + JSON.stringify(ret) + "err = " + JSON.stringify(err))
+        api.alert({title:ret.result_msg, msg:ret.err_detail});
 	}
 }
 
@@ -79,10 +80,27 @@ function getApiVersion() {
 	demo.getApiVersion(callBack);
 	
 	function callBack(ret, err) {
-        alert("ret = " + JSON.stringify(ret) + "err = " + JSON.stringify(err))
-	}
+        api.alert({title:"版本号", msg:ret.apiVersion})
+    }
 }
-	apiready = function() {
+
+function isWXAppInstalled() {
+    var demo = api.require('beecloud');
+    demo.isWXAppInstalled(callBack);
+    function callBack(ret, err) {
+        api.alert({title: ret.flag?"已安装微信客户端":"您还未安装微信客户端"});
+    }
+}
+
+function isSandboxMode() {
+    var demo = api.require('beecloud');
+    demo.isSandboxMode(callBack);
+    function callBack(ret, err) {
+        api.alert({title: ret.flag?"当前为sandbox环境":"当前为生产环境"});
+    }
+}
+
+apiready = function() {
 		
 	};
 </script>

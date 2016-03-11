@@ -51,7 +51,7 @@
 
 - (void)isSandboxMode:(NSDictionary *)paramDic {
     _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
-    [self sendResultEventWithCallbackId:_cbId dataDict:@{@"sandbox":@([BCPayCache currentMode])} errDict:nil doDelete:YES];
+    [self sendResultEventWithCallbackId:_cbId dataDict:@{@"flag":@([BCPayCache currentMode])} errDict:nil doDelete:YES];
 }
 
 - (NSString *)genOutTradeNo {

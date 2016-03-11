@@ -1,6 +1,0 @@
-{
-    "name":"beecloud",
-    "class":"BeeCloud",
-    "methods":["pay","getApiVersion","isWXAppInstalled","isSandboxMode"],
-    "launchClassMethod":"launch"
-}
