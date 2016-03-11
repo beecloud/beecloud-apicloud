@@ -6,6 +6,8 @@
  */
 package cn.beecloud;
 
+import android.os.Build;
+
 import com.google.gson.Gson;
 
 import java.io.BufferedOutputStream;
@@ -101,7 +103,10 @@ class BCHttpClientUtil {
             httpsURLConnection = (HttpsURLConnection)urlObj.openConnection();
             httpsURLConnection.setConnectTimeout(BCCache.getInstance().connectTimeout);
             httpsURLConnection.setDoInput(true);
-
+            // 4.0 ~ 4.3 存在EOFException
+            if (Build.VERSION.SDK_INT > 13 && Build.VERSION.SDK_INT < 19) {
+            	httpsURLConnection.setRequestProperty("Connection", "close");
+            }
             response = readStream(httpsURLConnection);
 
         } catch (MalformedURLException e) {
@@ -266,7 +271,11 @@ class BCHttpClientUtil {
             httpsURLConnection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
             httpsURLConnection.setDoOutput(true);
             httpsURLConnection.setChunkedStreamingMode(0);
-
+            // 4.0 ~ 4.3 存在EOFException
+            if (Build.VERSION.SDK_INT > 13 && Build.VERSION.SDK_INT < 19) {
+            	httpsURLConnection.setRequestProperty("Connection", "close");
+            }
+            
             //start to post
             response = writeStream(httpsURLConnection, jsonStr);
 

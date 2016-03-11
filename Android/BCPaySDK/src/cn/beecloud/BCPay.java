@@ -39,7 +39,7 @@ import cn.beecloud.entity.BCPayResult;
 
 public class BCPay extends UZModule {
 
-	public static final String apiVersion = "1.3.0";
+	public static final String apiVersion = BeeCloud.BEECLOUD_ANDROID_SDK_VERSION;
 			
     static UZModuleContext moduleContext;
     
@@ -153,7 +153,7 @@ public class BCPay extends UZModule {
 	 * <strong>函数</strong><br><br>
 	 * 该函数映射至Javascript中bcPay对象的pay函数<br><br>
 	 * <strong>JS Example：</strong><br>
-	 * bcPay.getApiVersion(argument);
+	 * bcPay.getApiVersion();
 	 * 
 	 * @param moduleContext  (Required)
 	 */
@@ -170,6 +170,48 @@ public class BCPay extends UZModule {
     	moduleContext.success(ret, true);
     }
 
+    /**
+	 * <strong>函数</strong><br><br>
+	 * 该函数映射至Javascript中bcPay对象的pay函数<br><br>
+	 * <strong>JS Example：</strong><br>
+	 * bcPay.isSandboxMode();
+	 * 
+	 * @param moduleContext  (Required)
+	 */
+    @UzJavascriptMethod
+    public void jsmethod_isSandboxMode(final UZModuleContext moduleContext) {
+    	JSONObject ret = new JSONObject();
+    	
+    	try {
+			ret.put("flag", BCCache.getInstance().isTestMode);
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+    	
+    	moduleContext.success(ret, true);
+    }
+    
+    /**
+	 * <strong>函数</strong><br><br>
+	 * 该函数映射至Javascript中bcPay对象的pay函数<br><br>
+	 * <strong>JS Example：</strong><br>
+	 * bcPay.isWXAppInstalled();
+	 * 
+	 * @param moduleContext  (Required)
+	 */
+    @UzJavascriptMethod
+    public void jsmethod_isWXAppInstalled(final UZModuleContext moduleContext) {
+    	JSONObject ret = new JSONObject();
+    	
+    	try {
+			ret.put("flag", this.isWXPaySupported());
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+    	
+    	moduleContext.success(ret, true);
+    }
+    
     /**
 	 * <strong>函数</strong><br><br>
 	 * 该函数映射至Javascript中bcPay对象的pay函数<br><br>
