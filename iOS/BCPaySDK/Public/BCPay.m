@@ -1,4 +1,4 @@
-//
+ //
 //  BCPay.m
 //  BCPay
 //
@@ -12,11 +12,13 @@
 #import "WXApi.h"
 #import "AlipaySDK.h"
 #import "UPPayPlugin.h"
+#import "UPAPayPlugin.h"
 #import "NSDictionaryUtils.h"
 #import "PaySandBoxViewController.h"
+#import <PassKit/PassKit.h>
 
 
-@interface BCPay ()<WXApiDelegate, UPPayPluginDelegate>
+@interface BCPay ()<WXApiDelegate, UPPayPluginDelegate, UPAPayPluginDelegate>
 
 @property (nonatomic, weak) id<BeeCloudDelegate> deleagte;
 
@@ -102,9 +104,6 @@
         case BCObjsTypeQueryRefundReq:
             [instance reqQueryOrder:(BCQueryRefundReq *)req];
             break;
-        case BCObjsTypeRefundStatusReq:
-            [instance reqRefundStatus:(BCRefundStatusReq *)req];
-            break;
         default:
             break;
     }
@@ -138,11 +137,11 @@
         parameters[@"return_url"] = @"http://payservice.beecloud.cn/apicloud/baidu/return_url.php";
     }
     
-    AFHTTPRequestOperationManager *manager = [BCPayUtil getAFHTTPRequestOperationManager];
+    BCHTTPSessionManager *manager = [BCPayUtil getBCHTTPSessionManager];
     
-    [manager POST:[BCPayUtil getBestHostWithFormat:kRestApiPay] parameters:parameters
-          success:^(AFHTTPRequestOperation *operation, id response) {
-        
+    [manager POST:[BCPayUtil getBestHostWithFormat:kRestApiPay] parameters:parameters progress:nil
+          success:^(NSURLSessionTask *task, id response) {
+    
               NSDictionary *resp = (NSDictionary *)response;
               if ([[resp objectForKey:kKeyResponseResultCode] integerValue] != 0) {
                   if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
@@ -164,14 +163,13 @@
                   } else {
                       if ([req.channel isEqualToString: PayChannelAliApp]) {
                           [dic setObject:req.scheme forKey:@"scheme"];
-                      } else if ([req.channel isEqualToString: PayChannelUnApp]) {
+                      } else if ([req.channel isEqualToString: PayChannelUnApp] || [req.channel isEqualToString: PayChannelBCApp] || [req.channel isEqualToString: PayChannelApple]) {
                           [dic setObject:req.viewController forKey:@"viewController"];
                       }
                       [self doPayAction:req.channel source:dic];
                   }
-                 
               }
-          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          } failure:^(NSURLSessionTask *operation, NSError *error) {
               [self doErrorResponse:kNetWorkError errDetail:kNetWorkError];
           }];
 }
@@ -184,8 +182,10 @@
             [self doWXPay:dic];
         } else if ([channel isEqualToString:PayChannelAliApp]) {
             [self doAliPay:dic];
-        } else if ([channel isEqualToString:PayChannelUnApp]) {
+        } else if ([channel isEqualToString:PayChannelUnApp] || [channel isEqualToString:PayChannelBCApp]) {
             [self doUnionPay:dic];
+        } else if ([channel isEqualToString:PayChannelApple]) {
+            [self doApplePay:dic];
         } else if ([channel isEqualToString:PayChannelBaiduWap]) {
             if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudBaidu:)]) {
                 [_deleagte onBeeCloudBaidu:[dic stringValueForKey:@"url" defaultValue:@""]];
@@ -229,6 +229,58 @@
     });
 }
 
++ (BOOL)canMakeApplePayments {
+    return [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:@[PKPaymentNetworkChinaUnionPay]];
+}
+
+- (BOOL)doApplePay:(NSMutableDictionary *)dic {
+    if ([BCPay canMakeApplePayments]) {
+        NSString *tn = [dic stringValueForKey:@"tn" defaultValue:@""];
+        NSLog(@"apple tn = %@", dic);
+        if (tn.isValid) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UPAPayPlugin startPay:tn mode:@"01" viewController:dic[@"viewController"] delegate:[BCPay sharedInstance] andAPMechantID:dic[@"apple_mer_id"]];
+            });
+            return YES;
+        }
+    }
+    return NO;
+}
+
+#pragma mark - Implementation ApplePayDelegate
+
+- (void)UPAPayPluginResult:(UPPayResult *)payResult {
+    int errcode = BCErrCodeFail;
+    NSString *strMsg = @"支付失败";
+    
+    switch (payResult.paymentResultStatus) {
+        case UPPaymentResultStatusSuccess: {
+            strMsg = @"支付成功";
+            errcode = BCSuccess;
+            break;
+        }
+        case UPPaymentResultStatusFailure:
+            break;
+        case UPPaymentResultStatusCancel: {
+            strMsg = @"支付取消";
+            break;
+        }
+        case UPPaymentResultStatusUnknownCancel: {
+            strMsg = @"支付取消,交易已发起,状态不确定,商户需查询商户后台确认支付状态";
+            break;
+        }
+    }
+    
+    NSMutableDictionary *dic =[NSMutableDictionary dictionaryWithCapacity:10];
+    dic[kKeyResponseResultCode] = @(errcode);
+    dic[kKeyResponseResultMsg] = strMsg;
+    dic[kKeyResponseErrDetail] = strMsg;
+    
+    if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
+        [_deleagte onBeeCloudResp:dic];
+    }
+}
+
 #pragma mark Query Bills/Refunds
 
 - (void)reqQueryOrder:(BCQueryReq *)req {
@@ -266,12 +318,12 @@
     
     NSMutableDictionary *preparepara = [BCPayUtil getWrappedParametersForGetRequest:parameters];
     
-    AFHTTPRequestOperationManager *manager = [BCPayUtil getAFHTTPRequestOperationManager];
+    BCHTTPSessionManager *manager = [BCPayUtil getBCHTTPSessionManager];
     
     __block NSTimeInterval tStart = [NSDate timeIntervalSinceReferenceDate];
     
-    [manager GET:reqUrl parameters:preparepara
-         success:^(AFHTTPRequestOperation *operation, id response) {
+    [manager GET:reqUrl parameters:preparepara progress:nil
+         success:^(NSURLSessionTask *task, id response) {
              BCPayLog(@"query end time = %f", [NSDate timeIntervalSinceReferenceDate] - tStart);
              NSDictionary *resp = (NSDictionary *)response;
              if ([resp objectForKey:kKeyResponseResultCode] != 0) {
@@ -282,7 +334,7 @@
                  NSLog(@"channel=%@, resp=%@", req.channel, response);
                  [self doQueryResponse:(NSDictionary *)response];
              }
-         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         } failure:^(NSURLSessionTask *operation, NSError *error) {
              [self doErrorResponse:kNetWorkError errDetail:kNetWorkError];
          }];
 }
@@ -295,56 +347,13 @@
     }
 }
 
-#pragma mark Refund Status
-
-- (void)reqRefundStatus:(BCRefundStatusReq *)req {
-    if (req == nil) {
-        [self doErrorResponse:kKeyCheckParamsFail errDetail:@"请求结构体不合法"];
-        return;
-    }
-    
-    NSMutableDictionary *parameters = [BCPayUtil prepareParametersForPay];
-    if (parameters == nil) {
-        [self doErrorResponse:kKeyCheckParamsFail errDetail:@"请检查是否全局初始化"];
-        return;
-    }
-    
-    if (req.refundno.isValid) {
-        parameters[@"refund_no"] = req.refundno;
-    }
-    parameters[@"channel"] = @"WX";
-    
-    NSMutableDictionary *preparepara = [BCPayUtil getWrappedParametersForGetRequest:parameters];
-    
-    AFHTTPRequestOperationManager *manager = [BCPayUtil getAFHTTPRequestOperationManager];
-    
-    [manager GET:[BCPayUtil getBestHostWithFormat:kRestApiRefundState] parameters:preparepara
-         success:^(AFHTTPRequestOperation *operation, id response) {
-             [self doQueryRefundStatus:(NSDictionary *)response];
-         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             [self doErrorResponse:kNetWorkError errDetail:kNetWorkError];
-         }];
-}
-
-- (void)doQueryRefundStatus:(NSDictionary *)dic {
-    BCRefundStatusResp *resp = [[BCRefundStatusResp alloc] init];
-    resp.result_code = [dic[kKeyResponseResultCode] intValue];
-    resp.result_msg = dic[kKeyResponseResultMsg];
-    resp.err_detail = dic[kKeyResponseErrDetail];
-    resp.refundStatus = [dic objectForKey:@"refund_status"];
-    
-    if (_deleagte && [_deleagte respondsToSelector:@selector(onBeeCloudResp:)]) {
-        [_deleagte onBeeCloudResp:resp];
-    }
-}
-
 #pragma mark Util Function
 
 - (BOOL)isValidChannel:(NSString *)channel {
     if (!channel.isValid) {
         return NO;
     }
-    NSArray *channelList = @[PayChannelWxApp,PayChannelAliApp,PayChannelUnApp,PayChannelBaiduWap, PayChannelBaiduApp];
+    NSArray *channelList = @[PayChannelWxApp, PayChannelAliApp, PayChannelUnApp, PayChannelBaiduWap, PayChannelBaiduApp, PayChannelBCApp, PayChannelApple];
     return [channelList containsObject:channel];
 }
 

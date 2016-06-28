@@ -40,16 +40,12 @@
 		368275141B9D573C003F9638 /* BCQueryRefundReq.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274B41B9D573C003F9638 /* BCQueryRefundReq.m */; };
 		368275151B9D573C003F9638 /* BCQueryReq.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274B51B9D573C003F9638 /* BCQueryReq.h */; };
 		368275161B9D573C003F9638 /* BCQueryReq.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274B61B9D573C003F9638 /* BCQueryReq.m */; };
-		368275171B9D573C003F9638 /* BCRefundStatusReq.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274B71B9D573C003F9638 /* BCRefundStatusReq.h */; };
-		368275181B9D573C003F9638 /* BCRefundStatusReq.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274B81B9D573C003F9638 /* BCRefundStatusReq.m */; };
 		368275191B9D573C003F9638 /* BCBaseResp.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274BA1B9D573C003F9638 /* BCBaseResp.h */; };
 		3682751A1B9D573C003F9638 /* BCBaseResp.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274BB1B9D573C003F9638 /* BCBaseResp.m */; };
 		3682751B1B9D573C003F9638 /* BCPayResp.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274BC1B9D573C003F9638 /* BCPayResp.h */; };
 		3682751C1B9D573C003F9638 /* BCPayResp.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274BD1B9D573C003F9638 /* BCPayResp.m */; };
 		3682751D1B9D573C003F9638 /* BCQueryResp.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274BE1B9D573C003F9638 /* BCQueryResp.h */; };
 		3682751E1B9D573C003F9638 /* BCQueryResp.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274BF1B9D573C003F9638 /* BCQueryResp.m */; };
-		3682751F1B9D573C003F9638 /* BCRefundStatusResp.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274C01B9D573C003F9638 /* BCRefundStatusResp.h */; };
-		368275201B9D573C003F9638 /* BCRefundStatusResp.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274C11B9D573C003F9638 /* BCRefundStatusResp.m */; };
 		368275211B9D573C003F9638 /* BCBaseResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274C31B9D573C003F9638 /* BCBaseResult.h */; };
 		368275221B9D573C003F9638 /* BCBaseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 368274C41B9D573C003F9638 /* BCBaseResult.m */; };
 		368275231B9D573C003F9638 /* BCQueryBillResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 368274C51B9D573C003F9638 /* BCQueryBillResult.h */; };
@@ -99,6 +95,22 @@
 		368275561B9D573C003F9638 /* NSString+IsValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 368275011B9D573C003F9638 /* NSString+IsValid.m */; };
 		368275571B9D573C003F9638 /* BCPay.h in Headers */ = {isa = PBXBuildFile; fileRef = 368275031B9D573C003F9638 /* BCPay.h */; };
 		368275581B9D573C003F9638 /* BCPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 368275041B9D573C003F9638 /* BCPay.m */; };
+		368D38F31D225A5700929E5E /* UPAPayPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 368D38F11D225A5700929E5E /* UPAPayPlugin.h */; };
+		368D38F41D225A5700929E5E /* UPAPayPluginDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 368D38F21D225A5700929E5E /* UPAPayPluginDelegate.h */; };
+		368D38F61D225B5900929E5E /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368D38F51D225B5900929E5E /* PassKit.framework */; };
+		368D39211D226EB900929E5E /* BCHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 368D39141D226EB900929E5E /* BCHTTPSessionManager.h */; };
+		368D39221D226EB900929E5E /* BCHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 368D39151D226EB900929E5E /* BCHTTPSessionManager.m */; };
+		368D39231D226EB900929E5E /* BCNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 368D39161D226EB900929E5E /* BCNetworking.h */; };
+		368D39241D226EB900929E5E /* BCNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 368D39171D226EB900929E5E /* BCNetworkReachabilityManager.h */; };
+		368D39251D226EB900929E5E /* BCNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 368D39181D226EB900929E5E /* BCNetworkReachabilityManager.m */; };
+		368D39261D226EB900929E5E /* BCSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 368D39191D226EB900929E5E /* BCSecurityPolicy.h */; };
+		368D39271D226EB900929E5E /* BCSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 368D391A1D226EB900929E5E /* BCSecurityPolicy.m */; };
+		368D39281D226EB900929E5E /* BCURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 368D391B1D226EB900929E5E /* BCURLRequestSerialization.h */; };
+		368D39291D226EB900929E5E /* BCURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 368D391C1D226EB900929E5E /* BCURLRequestSerialization.m */; };
+		368D392A1D226EB900929E5E /* BCURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 368D391D1D226EB900929E5E /* BCURLResponseSerialization.h */; };
+		368D392B1D226EB900929E5E /* BCURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 368D391E1D226EB900929E5E /* BCURLResponseSerialization.m */; };
+		368D392C1D226EB900929E5E /* BCURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 368D391F1D226EB900929E5E /* BCURLSessionManager.h */; };
+		368D392D1D226EB900929E5E /* BCURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 368D39201D226EB900929E5E /* BCURLSessionManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,16 +155,12 @@
 		368274B41B9D573C003F9638 /* BCQueryRefundReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCQueryRefundReq.m; sourceTree = "<group>"; };
 		368274B51B9D573C003F9638 /* BCQueryReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCQueryReq.h; sourceTree = "<group>"; };
 		368274B61B9D573C003F9638 /* BCQueryReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCQueryReq.m; sourceTree = "<group>"; };
-		368274B71B9D573C003F9638 /* BCRefundStatusReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCRefundStatusReq.h; sourceTree = "<group>"; };
-		368274B81B9D573C003F9638 /* BCRefundStatusReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRefundStatusReq.m; sourceTree = "<group>"; };
 		368274BA1B9D573C003F9638 /* BCBaseResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCBaseResp.h; sourceTree = "<group>"; };
 		368274BB1B9D573C003F9638 /* BCBaseResp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCBaseResp.m; sourceTree = "<group>"; };
 		368274BC1B9D573C003F9638 /* BCPayResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCPayResp.h; sourceTree = "<group>"; };
 		368274BD1B9D573C003F9638 /* BCPayResp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCPayResp.m; sourceTree = "<group>"; };
 		368274BE1B9D573C003F9638 /* BCQueryResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCQueryResp.h; sourceTree = "<group>"; };
 		368274BF1B9D573C003F9638 /* BCQueryResp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCQueryResp.m; sourceTree = "<group>"; };
-		368274C01B9D573C003F9638 /* BCRefundStatusResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCRefundStatusResp.h; sourceTree = "<group>"; };
-		368274C11B9D573C003F9638 /* BCRefundStatusResp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRefundStatusResp.m; sourceTree = "<group>"; };
 		368274C31B9D573C003F9638 /* BCBaseResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCBaseResult.h; sourceTree = "<group>"; };
 		368274C41B9D573C003F9638 /* BCBaseResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCBaseResult.m; sourceTree = "<group>"; };
 		368274C51B9D573C003F9638 /* BCQueryBillResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCQueryBillResult.h; sourceTree = "<group>"; };
@@ -203,6 +211,22 @@
 		368275011B9D573C003F9638 /* NSString+IsValid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+IsValid.m"; sourceTree = "<group>"; };
 		368275031B9D573C003F9638 /* BCPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCPay.h; sourceTree = "<group>"; };
 		368275041B9D573C003F9638 /* BCPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCPay.m; sourceTree = "<group>"; };
+		368D38F11D225A5700929E5E /* UPAPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPlugin.h; sourceTree = "<group>"; };
+		368D38F21D225A5700929E5E /* UPAPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPluginDelegate.h; sourceTree = "<group>"; };
+		368D38F51D225B5900929E5E /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		368D39141D226EB900929E5E /* BCHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCHTTPSessionManager.h; sourceTree = "<group>"; };
+		368D39151D226EB900929E5E /* BCHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCHTTPSessionManager.m; sourceTree = "<group>"; };
+		368D39161D226EB900929E5E /* BCNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCNetworking.h; sourceTree = "<group>"; };
+		368D39171D226EB900929E5E /* BCNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		368D39181D226EB900929E5E /* BCNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		368D39191D226EB900929E5E /* BCSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSecurityPolicy.h; sourceTree = "<group>"; };
+		368D391A1D226EB900929E5E /* BCSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSecurityPolicy.m; sourceTree = "<group>"; };
+		368D391B1D226EB900929E5E /* BCURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCURLRequestSerialization.h; sourceTree = "<group>"; };
+		368D391C1D226EB900929E5E /* BCURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCURLRequestSerialization.m; sourceTree = "<group>"; };
+		368D391D1D226EB900929E5E /* BCURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCURLResponseSerialization.h; sourceTree = "<group>"; };
+		368D391E1D226EB900929E5E /* BCURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCURLResponseSerialization.m; sourceTree = "<group>"; };
+		368D391F1D226EB900929E5E /* BCURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCURLSessionManager.h; sourceTree = "<group>"; };
+		368D39201D226EB900929E5E /* BCURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCURLSessionManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				368D38F61D225B5900929E5E /* PassKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +244,7 @@
 		364BC4CB1B5502C700EAFCCE = {
 			isa = PBXGroup;
 			children = (
+				368D38F51D225B5900929E5E /* PassKit.framework */,
 				368274A01B9D573C003F9638 /* BCPaySDK */,
 				364BC4D51B5502C700EAFCCE /* Products */,
 			);
@@ -298,8 +324,6 @@
 				368274B41B9D573C003F9638 /* BCQueryRefundReq.m */,
 				368274B51B9D573C003F9638 /* BCQueryReq.h */,
 				368274B61B9D573C003F9638 /* BCQueryReq.m */,
-				368274B71B9D573C003F9638 /* BCRefundStatusReq.h */,
-				368274B81B9D573C003F9638 /* BCRefundStatusReq.m */,
 			);
 			path = BCRequest;
 			sourceTree = "<group>";
@@ -313,8 +337,6 @@
 				368274BD1B9D573C003F9638 /* BCPayResp.m */,
 				368274BE1B9D573C003F9638 /* BCQueryResp.h */,
 				368274BF1B9D573C003F9638 /* BCQueryResp.m */,
-				368274C01B9D573C003F9638 /* BCRefundStatusResp.h */,
-				368274C11B9D573C003F9638 /* BCRefundStatusResp.m */,
 			);
 			path = BCResponse;
 			sourceTree = "<group>";
@@ -335,6 +357,7 @@
 		368274C91B9D573C003F9638 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				368D38F01D225A5700929E5E /* Apple */,
 				368274CA1B9D573C003F9638 /* AFNetworking */,
 				368274DE1B9D573C003F9638 /* AliPay */,
 				368274E11B9D573C003F9638 /* JSON */,
@@ -415,6 +438,7 @@
 		368274F91B9D573C003F9638 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				368D39131D226EB900929E5E /* BCNetworking */,
 				36611E531C28EACE002D8611 /* ViewController */,
 				368274FA1B9D573C003F9638 /* BCPayCache.h */,
 				368274FB1B9D573C003F9638 /* BCPayCache.m */,
@@ -437,6 +461,35 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
+		368D38F01D225A5700929E5E /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				368D38F11D225A5700929E5E /* UPAPayPlugin.h */,
+				368D38F21D225A5700929E5E /* UPAPayPluginDelegate.h */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
+		368D39131D226EB900929E5E /* BCNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				368D39141D226EB900929E5E /* BCHTTPSessionManager.h */,
+				368D39151D226EB900929E5E /* BCHTTPSessionManager.m */,
+				368D39161D226EB900929E5E /* BCNetworking.h */,
+				368D39171D226EB900929E5E /* BCNetworkReachabilityManager.h */,
+				368D39181D226EB900929E5E /* BCNetworkReachabilityManager.m */,
+				368D39191D226EB900929E5E /* BCSecurityPolicy.h */,
+				368D391A1D226EB900929E5E /* BCSecurityPolicy.m */,
+				368D391B1D226EB900929E5E /* BCURLRequestSerialization.h */,
+				368D391C1D226EB900929E5E /* BCURLRequestSerialization.m */,
+				368D391D1D226EB900929E5E /* BCURLResponseSerialization.h */,
+				368D391E1D226EB900929E5E /* BCURLResponseSerialization.m */,
+				368D391F1D226EB900929E5E /* BCURLSessionManager.h */,
+				368D39201D226EB900929E5E /* BCURLSessionManager.m */,
+			);
+			path = BCNetworking;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -446,28 +499,34 @@
 			files = (
 				368275341B9D573C003F9638 /* AFURLRequestSerialization.h in Headers */,
 				368275531B9D573C003F9638 /* BCPayUtil.h in Headers */,
+				368D392C1D226EB900929E5E /* BCURLSessionManager.h in Headers */,
 				3682752D1B9D573C003F9638 /* AFNetworking.h in Headers */,
 				368275381B9D573C003F9638 /* AFURLSessionManager.h in Headers */,
 				368275321B9D573C003F9638 /* AFURLConnectionOperation.h in Headers */,
 				368275051B9D573C003F9638 /* BeeCloud.h in Headers */,
-				3682751F1B9D573C003F9638 /* BCRefundStatusResp.h in Headers */,
 				36611E5A1C28EACE002D8611 /* PaySandBoxViewController.h in Headers */,
 				3682752B1B9D573C003F9638 /* AFHTTPSessionManager.h in Headers */,
+				368D38F31D225A5700929E5E /* UPAPayPlugin.h in Headers */,
 				368275131B9D573C003F9638 /* BCQueryRefundReq.h in Headers */,
+				368D392A1D226EB900929E5E /* BCURLResponseSerialization.h in Headers */,
 				368275411B9D573C003F9638 /* SBJsonBase.h in Headers */,
-				368275171B9D573C003F9638 /* BCRefundStatusReq.h in Headers */,
+				368D38F41D225A5700929E5E /* UPAPayPluginDelegate.h in Headers */,
 				368275421B9D573C003F9638 /* SBJsonParser.h in Headers */,
 				368275301B9D573C003F9638 /* AFSecurityPolicy.h in Headers */,
+				368D39281D226EB900929E5E /* BCURLRequestSerialization.h in Headers */,
 				3682750B1B9D573C003F9638 /* BCBaseReq.h in Headers */,
 				3682751D1B9D573C003F9638 /* BCQueryResp.h in Headers */,
 				36611E581C28EACE002D8611 /* BaiduViewController.h in Headers */,
+				368D39261D226EB900929E5E /* BCSecurityPolicy.h in Headers */,
 				368275231B9D573C003F9638 /* BCQueryBillResult.h in Headers */,
+				368D39231D226EB900929E5E /* BCNetworking.h in Headers */,
 				368275431B9D573C003F9638 /* SBJsonWriter.h in Headers */,
 				3682752E1B9D573C003F9638 /* AFNetworkReachabilityManager.h in Headers */,
 				368275271B9D573C003F9638 /* AFHTTPRequestOperation.h in Headers */,
 				368275511B9D573C003F9638 /* BCPayConstant.h in Headers */,
 				3682754D1B9D573C003F9638 /* WXApi.h in Headers */,
 				3682753F1B9D573C003F9638 /* NSString+SBJSON.h in Headers */,
+				368D39241D226EB900929E5E /* BCNetworkReachabilityManager.h in Headers */,
 				368275251B9D573C003F9638 /* BCQueryRefundResult.h in Headers */,
 				368275571B9D573C003F9638 /* BCPay.h in Headers */,
 				368275551B9D573C003F9638 /* NSString+IsValid.h in Headers */,
@@ -490,6 +549,7 @@
 				3682753B1B9D573C003F9638 /* APayAuthInfo.h in Headers */,
 				368275071B9D573C003F9638 /* NSDictionaryUtils.h in Headers */,
 				368275361B9D573C003F9638 /* AFURLResponseSerialization.h in Headers */,
+				368D39211D226EB900929E5E /* BCHTTPSessionManager.h in Headers */,
 				368275091B9D573C003F9638 /* UZAppUtils.h in Headers */,
 				3682750A1B9D573C003F9638 /* UZModule.h in Headers */,
 				3682754E1B9D573C003F9638 /* WXApiObject.h in Headers */,
@@ -578,7 +638,9 @@
 				368275541B9D573C003F9638 /* BCPayUtil.m in Sources */,
 				368275501B9D573C003F9638 /* BCPayCache.m in Sources */,
 				3682750C1B9D573C003F9638 /* BCBaseReq.m in Sources */,
+				368D392D1D226EB900929E5E /* BCURLSessionManager.m in Sources */,
 				368275261B9D573C003F9638 /* BCQueryRefundResult.m in Sources */,
+				368D392B1D226EB900929E5E /* BCURLResponseSerialization.m in Sources */,
 				3682752C1B9D573C003F9638 /* AFHTTPSessionManager.m in Sources */,
 				368275141B9D573C003F9638 /* BCQueryRefundReq.m in Sources */,
 				3682752F1B9D573C003F9638 /* AFNetworkReachabilityManager.m in Sources */,
@@ -587,17 +649,19 @@
 				368275331B9D573C003F9638 /* AFURLConnectionOperation.m in Sources */,
 				368275391B9D573C003F9638 /* AFURLSessionManager.m in Sources */,
 				368275241B9D573C003F9638 /* BCQueryBillResult.m in Sources */,
+				368D39221D226EB900929E5E /* BCHTTPSessionManager.m in Sources */,
 				3682751C1B9D573C003F9638 /* BCPayResp.m in Sources */,
-				368275181B9D573C003F9638 /* BCRefundStatusReq.m in Sources */,
+				368D39251D226EB900929E5E /* BCNetworkReachabilityManager.m in Sources */,
 				368275061B9D573C003F9638 /* BeeCloud.m in Sources */,
-				368275201B9D573C003F9638 /* BCRefundStatusResp.m in Sources */,
 				36611E591C28EACE002D8611 /* BaiduViewController.m in Sources */,
+				368D39291D226EB900929E5E /* BCURLRequestSerialization.m in Sources */,
 				3682751E1B9D573C003F9638 /* BCQueryResp.m in Sources */,
 				368275221B9D573C003F9638 /* BCBaseResult.m in Sources */,
 				368275561B9D573C003F9638 /* NSString+IsValid.m in Sources */,
 				368275311B9D573C003F9638 /* AFSecurityPolicy.m in Sources */,
 				368275161B9D573C003F9638 /* BCQueryReq.m in Sources */,
 				3682752A1B9D573C003F9638 /* AFHTTPRequestOperationManager.m in Sources */,
+				368D39271D226EB900929E5E /* BCSecurityPolicy.m in Sources */,
 				36611E5B1C28EACE002D8611 /* PaySandBoxViewController.m in Sources */,
 				3682751A1B9D573C003F9638 /* BCBaseResp.m in Sources */,
 				368275371B9D573C003F9638 /* AFURLResponseSerialization.m in Sources */,

@@ -13,10 +13,10 @@
 
 @implementation BCPayUtil
 
-+ (AFHTTPRequestOperationManager *)getAFHTTPRequestOperationManager {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
++ (BCHTTPSessionManager *)getBCHTTPSessionManager {
+    BCHTTPSessionManager *manager = [BCHTTPSessionManager manager];
     manager.securityPolicy.allowInvalidCertificates = NO;
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.requestSerializer = [BCJSONRequestSerializer serializer];
     return manager;
 }
 
@@ -40,7 +40,7 @@
 
 + (NSString *)getBestHostWithFormat:(NSString *)format {
     NSString *verHost = [NSString stringWithFormat:@"%@%@",kBCHosts[arc4random()%kBCHostCount],reqApiVersion];
-    NSLog(@"host %@", verHost);
+//    NSLog(@"host %@", verHost);
     return [NSString stringWithFormat:format, verHost, [BCPayCache currentMode] ? @"/sandbox" : @""];
 }
 

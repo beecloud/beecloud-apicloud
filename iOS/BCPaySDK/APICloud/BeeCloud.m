@@ -44,6 +44,11 @@
     [self sendResultEventWithCallbackId:_cbId dataDict:@{@"apiVersion":kApiVersion} errDict:nil doDelete:YES];
 }
 
+- (void)canMakeApplePayments:(NSDictionary *)paramDic {
+    _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
+    [self sendResultEventWithCallbackId:_cbId dataDict:@{@"status":@([BCPay canMakeApplePayments])} errDict:nil doDelete:YES];
+}
+
 - (void)isWXAppInstalled:(NSDictionary *)paramDic {
     _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
     [self sendResultEventWithCallbackId:_cbId dataDict:@{@"flag":@([BCPay isWXAppInstalled])} errDict:nil doDelete:YES];
@@ -108,7 +113,6 @@
     if (wxAppid.isValid) {
         [BCPay initWeChatPay:wxAppid];
     }
-    
 }
 
 #pragma mark - UIApplicationDelegate

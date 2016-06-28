@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "AFNetworking.h"
+#import "BCNetworking.h"
 #import "BCPayConstant.h"
 #import "BCPayCache.h"
 //#import "BCPayObject.h"
@@ -21,7 +21,7 @@
 /*!
  A wrapper for AFHTTPRequestOperationManager.
  */
-+ (AFHTTPRequestOperationManager *)getAFHTTPRequestOperationManager;
++ (BCHTTPSessionManager *)getBCHTTPSessionManager;
 
 /**
  *  Get wrapped parameters in the format of "para" to a map for GET REST APIs.
