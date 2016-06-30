@@ -63,7 +63,7 @@
  *
  *  @return 支持返回YES
  */
-+ (BOOL)canMakeApplePayments;
++ (BOOL)canMakeApplePayments:(NSUInteger)cardType;
 
 /**
  *  设置接收消息的对象

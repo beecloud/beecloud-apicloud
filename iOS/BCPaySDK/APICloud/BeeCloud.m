@@ -34,6 +34,7 @@
     payReq.totalfee = [NSString stringWithFormat:@"%ld",(long)[paramDic integerValueForKey:@"totalfee" defaultValue:0]];
     payReq.billno = [paramDic stringValueForKey:@"billno" defaultValue:@""];
     payReq.scheme = [[theApp getFeatureByName:kKeyMoudleName] stringValueForKey:kKeyUrlScheme defaultValue:nil];
+    payReq.cardType = [paramDic integerValueForKey:@"cardType" defaultValue:0];
     payReq.viewController = self.viewController;
     payReq.optional = [paramDic dictValueForKey:@"optional" defaultValue:nil];
     [BCPay sendBCReq:payReq];
@@ -46,7 +47,8 @@
 
 - (void)canMakeApplePayments:(NSDictionary *)paramDic {
     _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
-    [self sendResultEventWithCallbackId:_cbId dataDict:@{@"status":@([BCPay canMakeApplePayments])} errDict:nil doDelete:YES];
+    NSUInteger cardType = [paramDic integerValueForKey:@"cardType" defaultValue:0];
+    [self sendResultEventWithCallbackId:_cbId dataDict:@{@"status":@([BCPay canMakeApplePayments:cardType])} errDict:nil doDelete:YES];
 }
 
 - (void)isWXAppInstalled:(NSDictionary *)paramDic {

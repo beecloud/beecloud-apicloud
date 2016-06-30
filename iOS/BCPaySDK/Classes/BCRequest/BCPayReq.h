@@ -40,6 +40,10 @@
  */
 @property (nonatomic, retain) UIViewController *viewController;
 /**
+ *  Apple Pay必填，0 表示不区分卡类型；1 表示只支持借记卡；2 表示支持信用卡；默认为0
+ */
+@property (nonatomic, assign) NSUInteger cardType;
+/**
  *  扩展参数,可以传入任意数量的key/value对来补充对业务逻辑的需求
  */
 @property (nonatomic, retain) NSDictionary *optional;

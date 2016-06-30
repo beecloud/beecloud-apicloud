@@ -15,6 +15,13 @@
     self = [super init];
     if (self) {
         self.type = BCObjsTypePayReq;
+        self.channel = @"";
+        self.title = @"";
+        self.totalfee = @"";
+        self.billno = @"";
+        self.scheme = @"";
+        self.viewController = nil;
+        self.cardType = 0;
     }
     return self;
 }

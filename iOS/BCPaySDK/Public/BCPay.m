@@ -229,17 +229,40 @@
     });
 }
 
-+ (BOOL)canMakeApplePayments {
-    return [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:@[PKPaymentNetworkChinaUnionPay]];
++ (BOOL)canMakeApplePayments:(NSUInteger)cardType {
+    BOOL status = NO;
+    switch(cardType) {
+        case 0:
+        {
+            status = [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:@[PKPaymentNetworkChinaUnionPay]] ;
+            break;
+        }
+        case 1:
+        {
+            PKMerchantCapability merchantCapabilities = PKMerchantCapability3DS | PKMerchantCapabilityEMV | PKMerchantCapabilityDebit;
+            status = [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:@[PKPaymentNetworkChinaUnionPay] capabilities:merchantCapabilities];
+            break;
+        }
+        case 2:
+        {
+            PKMerchantCapability merchantCapabilities = PKMerchantCapability3DS | PKMerchantCapabilityEMV | PKMerchantCapabilityCredit;
+            status = [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:@[PKPaymentNetworkChinaUnionPay] capabilities:merchantCapabilities];
+            break;
+        }
+        default:
+            status = [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:@[PKPaymentNetworkChinaUnionPay]];
+            break;
+    }
+    return status;
 }
 
 - (BOOL)doApplePay:(NSMutableDictionary *)dic {
-    if ([BCPay canMakeApplePayments]) {
+    if ([BCPay canMakeApplePayments:[dic integerValueForKey:@"cardType" defaultValue:0]]) {
         NSString *tn = [dic stringValueForKey:@"tn" defaultValue:@""];
         NSLog(@"apple tn = %@", dic);
         if (tn.isValid) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [UPAPayPlugin startPay:tn mode:@"01" viewController:dic[@"viewController"] delegate:[BCPay sharedInstance] andAPMechantID:dic[@"apple_mer_id"]];
+                [UPAPayPlugin startPay:tn mode:@"00" viewController:dic[@"viewController"] delegate:[BCPay sharedInstance] andAPMechantID:dic[@"apple_mer_id"]];
             });
             return YES;
         }
