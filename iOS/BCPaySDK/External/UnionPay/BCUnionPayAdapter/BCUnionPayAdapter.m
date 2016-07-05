@@ -40,21 +40,24 @@
 #pragma mark - Implementation UnionPayDelegate
 
 - (void)UPPayPluginResult:(NSString *)result {
-    int errcode = BCErrCodeSentFail;
+    int errcode = BCErrCodeFail;
     NSString *strMsg = @"支付失败";
     if ([result isEqualToString:@"success"]) {
-        errcode = BCErrCodeSuccess;
+        errcode = BCSuccess;
         strMsg = @"支付成功";
     } else if ([result isEqualToString:@"cancel"]) {
         errcode = BCErrCodeUserCancel;
         strMsg = @"支付取消";
     }
     
-    BCPayResp *resp = (BCPayResp *)[BCPayCache sharedInstance].bcResp;
-    resp.resultCode = errcode;
-    resp.resultMsg = strMsg;
-    resp.errDetail = strMsg;
-    [BCPayCache beeCloudDoResponse];
+    NSMutableDictionary *dic =[NSMutableDictionary dictionaryWithCapacity:10];
+    dic[kKeyResponseResultCode] = @(errcode);
+    dic[kKeyResponseResultMsg] = strMsg;
+    dic[kKeyResponseErrDetail] = strMsg;
+    
+    if ([BCPay getBeeCloudDelegate] && [[BCPay getBeeCloudDelegate] respondsToSelector:@selector(onBeeCloudResp:)]) {
+        [[BCPay getBeeCloudDelegate] onBeeCloudResp:dic];
+    }
 }
 
 @end

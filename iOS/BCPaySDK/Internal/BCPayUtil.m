@@ -43,6 +43,15 @@
     return [NSString stringWithFormat:format, verHost, [BCPayCache currentMode] ? @"/sandbox" : @""];
 }
 
++ (BCPayUrlType)getUrlType:(NSURL *)url {
+    if ([url.host isEqualToString:@"safepay"])
+        return BCPayUrlAlipay;
+    else if ([url.scheme hasPrefix:@"wx"] && [url.host isEqualToString:@"pay"])
+        return BCPayUrlWeChat;
+    else
+        return BCPayUrlUnknown;
+}
+
 + (NSString *)generateRandomUUID {
     return [[NSUUID UUID] UUIDString].lowercaseString;
 }

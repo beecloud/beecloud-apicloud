@@ -15,14 +15,7 @@
 #import "BCPayReq.h"
 #import "BCPayResp.h"
 
-#import "BCQueryReq.h"
-#import "BCQueryResp.h"
-#import "BCQueryRefundReq.h"
-
-#import "BCBaseResult.h"
-#import "BCQueryBillResult.h"
-#import "BCQueryRefundResult.h"
-
 #import "NSString+IsValid.h"
+#import "NSDictionaryUtils.h"
 
 #endif

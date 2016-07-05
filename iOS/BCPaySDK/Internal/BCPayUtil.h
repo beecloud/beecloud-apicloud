@@ -50,6 +50,15 @@
  */
 + (NSString *)getBestHostWithFormat:(NSString *)format;
 
+/**
+ *  获取url的类型，微信或者支付宝
+ *
+ *  @param url 渠道返回的url
+ *
+ *  @return 微信或者支付宝
+ */
++ (BCPayUrlType)getUrlType:(NSURL *)url;
+
 #pragma mark Util Functions
 /**
  *  Generate a random UUID in the format of "550e8400-e29b-41d4-a716-446655440000", in lower case.

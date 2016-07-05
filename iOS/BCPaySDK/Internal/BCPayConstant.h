@@ -27,10 +27,6 @@ static NSString * const kKeyUrlScheme = @"urlScheme";
 
 static NSUInteger const kBCHostCount = 4;
 static NSString * const kBCHost = @"https://apidynamic.beecloud.cn";
-//static NSString * const kBCHosts[] = {@"https://apisz.beecloud.cn",
-//    @"https://apiqd.beecloud.cn",
-//    @"https://apibj.beecloud.cn",
-//    @"https://apihz.beecloud.cn"};
 
 static NSString * const reqApiVersion = @"/2/rest";
 
@@ -68,6 +64,12 @@ static NSString * const PayChannelBaiduWap = @"BD_WAP";
 static NSString * const PayChannelBaiduApp = @"BD_APP";
 static NSString * const PayChannelBCApp = @"BC_APP";
 static NSString * const PayChannelApple = @"APPLE";
+
+//Adapter
+static NSString * const kAdapterWXPay = @"BCWXPayAdapter";
+static NSString * const kAdapterAliPay = @"BCAliPayAdapter";
+static NSString * const kAdapterUnionPay = @"BCUnionPayAdapter";
+static NSString * const kAdapterApplePay = @"BCApplePayAdapter";
 
 typedef NS_ENUM(NSInteger, BCErrCode) {
     BCSuccess           = 0,    /**< 成功    */

@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+                <title>支付列表</title>
+                <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+                <style type="text/css">
+                    html,body{ width:100%; padding:0; margin:0; background-color:#efeef3;}
+                    h1,ul,li{ padding:0; margin:0;}
+                    .pay_info{ padding:10px 30px; margin:15px 0; background-color:#fff; text-align:center;}
+                    .pay_info span{ font-size:14px;}
+                    .pay_info h1{padding:10px 0; border-bottom:1px solid #efeef3; font-size:42px;}
+                    .pay_info p{ width:100%; text-align:left; color:#a3a3a3;}
+                    .pay_info p span{ float:right;}
+                    
+                    .pay_list{ width:100%; background-color:#fff;}
+                    .pay_list li{ list-style:none; height:40px; padding:10px 15px; border-bottom:1px solid #efeef3;}
+                    .pay_list li i{ display:inline-block; width:40px; height:40px; background:url(../image/bc.png) no-repeat; background-size:100% 100%; float:left;}
+                    .pay_list li:nth-child(1) i{ background-image:url(../image/wx.jpg);}
+                    .pay_list li:nth-child(2) i{ background-image:url(../image/ali.jpg);}
+                    .pay_list li:nth-child(3) i{ background-image:url(../image/un.jpg);}
+                    .pay_list li:nth-child(4) i{ background-image: url(../image/bd.jpg);}
+                    .pay_list li:nth-child(5) i{ background-image: url(../image/bc.png);}
+                    .pay_list li span{ font-size:14px; display:inline-block; float:left; margin-left:15px; line-height:20px; color:#a3a3a3;}
+                    .pay_list li span b{ color:#000; font-weight:normal;}
+                    </style>
+    </head>
+    
+    <body>
+        <div class="pay_info">
+            <h1><span>比可网络</span><br />¥100.00</h1>
+            <p>商品<span>自制白开水</span></p>
+            <p>交易单号<span>161165161df1d1fasd1616165</span></p>
+        </div>
+        <ul class="pay_list">
+            <li onclick="doPay('WX_APP');"><i></i><span><b>微信支付</b><br>使用微信支付</span></li>
+            <li onclick="doPay('ALI_APP');"><i></i><span><b>支付宝支付</b><br>使用支付宝支付</span></li>
+            <li onclick="doPay('UN_APP');"><i></i><span><b>银联在线</b><br>使用银联在线支付</span></li>
+            <li onclick="doPay('BD_WAP');"><i></i><span><b>百度钱包APP</b><br>百度钱包APP</span></li>
+            <li onclick="isSandboxMode();"><i></i><span><b>检查当前环境</b><br>isSandboxMode</span></li>
+            <li onclick="isWXAppInstalled();"><i></i><span><b>检查是否安装微信客户端</b><br>isWXAppInstalled</span></li>
+            <li onclick="canMakeApplePayments(0);"><i></i><span><b>是否支持ApplePay</b><br>canMakeApplePayments</span></li>
+            <li onclick="getApiVersion();"><i></i><span><b>getApiVersion</b><br>getApiVersion</span></li>
+        </ul>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+        function genBillno() {
+            var d = new Date();
+            var vYear = d.getFullYear();
+            var vMon = d.getMonth() + 1;
+            var vDay = d.getDate();
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var se = d.getSeconds();
+            var ms = d.getMilliseconds();
+            
+            billno = ""+vYear + (vMon < 10 ? "0" + vMon : vMon) + (vDay < 10 ? "0" + vDay : vDay) + (h < 10 ? "0" + h : h) + (m < 10 ? "0" + m : m) + (se < 10 ? "0" + se : se) + ms;
+            return billno;
+        }
+    
+    function doPay(channel) {
+        var payData = {
+            title: "APICloud 测试",
+            totalfee: 100,
+            billno: channel.replace("_","") + genBillno(),
+            channel: channel,
+            optional: {'userID':'张三','mobile':'0512-86861620'}
+        };
+        
+        var demo = api.require('beecloud');
+        demo.pay(payData, payCallBack);
+        
+        function payCallBack(ret, err) {
+            api.alert({title:ret.result_msg, msg:ret.err_detail});
+        }
+    }
+    
+    function getApiVersion() {
+        var demo = api.require('beecloud');
+        demo.getApiVersion(callBack);
+        
+        function callBack(ret, err) {
+            api.alert({title:"当前版本号", msg:"v "+ret.apiVersion});
+        }
+    }
+    
+    function isSandboxMode() {
+        var demo = api.require('beecloud');
+        demo.isSandboxMode(callBack);
+        
+        function callBack(ret, err) {
+            api.alert({title:"检查当前环境", msg:ret.flag?"沙箱测试环境":"生产环境"});
+        }
+    }
+    function isWXAppInstalled() {
+        var demo = api.require('beecloud');
+        demo.isWXAppInstalled(callBack);
+        
+        function callBack(ret, err) {
+            api.alert({title:"检查是否安装微信客户端", msg:ret.flag?"已安装":"未安装"});
+        }
+    }
+    function canMakeApplePayments(cardType) {
+        var demo = api.require('beecloud');
+        demo.canMakeApplePayments({cardType: cardType}, callBack);
+        
+        function callBack(ret, err) {
+            api.alert({title:"检查是否支持Apple Pay", msg:ret.status?"支持":"不支持"});
+        }
+    }
+    
+    apiready = function() {};
+    </script>
+</html>

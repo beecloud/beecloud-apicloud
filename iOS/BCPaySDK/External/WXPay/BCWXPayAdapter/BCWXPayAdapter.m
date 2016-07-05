@@ -57,12 +57,12 @@
     
     if ([resp isKindOfClass:[PayResp class]]) {
         PayResp *tempResp = (PayResp *)resp;
-        NSString *strMsg = nil;
+        NSString *strMsg = @"";
         int errcode = 0;
         switch (tempResp.errCode) {
             case WXSuccess:
                 strMsg = @"支付成功";
-                errcode = BCErrCodeSuccess;
+                errcode = BCSuccess;
                 break;
             case WXErrCodeUserCancel:
                 strMsg = @"支付取消";
@@ -70,15 +70,19 @@
                 break;
             default:
                 strMsg = @"支付失败";
-                errcode = BCErrCodeSentFail;
+                errcode = BCErrCodeFail;
                 break;
         }
         NSString *result = tempResp.errStr.isValid?[NSString stringWithFormat:@"%@,%@",strMsg,tempResp.errStr]:strMsg;
-        BCPayResp *resp = (BCPayResp *)[BCPayCache sharedInstance].bcResp;
-        resp.resultCode = errcode;
-        resp.resultMsg = result;
-        resp.errDetail = result;
-        [BCPayCache beeCloudDoResponse];
+        
+        NSMutableDictionary *dic =[NSMutableDictionary dictionaryWithCapacity:10];
+        dic[kKeyResponseResultCode] = @(errcode);
+        dic[kKeyResponseResultMsg] = result;
+        dic[kKeyResponseErrDetail] = result;
+        
+        if ([BCPay getBeeCloudDelegate] && [[BCPay getBeeCloudDelegate] respondsToSelector:@selector(onBeeCloudResp:)]) {
+            [[BCPay getBeeCloudDelegate] onBeeCloudResp:dic];
+        }
     }
 }
 

@@ -7,6 +7,9 @@ Description: BeeCloud Pay.
 
 [pay](#a1)
 [getApiVersion](#a2)
+[isSandboxMode](#a3)
+[isWXAppInstalled](#a4)
+[canMakeApplePayments](#a5)
 
 
 # **概述**
@@ -17,7 +20,7 @@ beecloud 封装了支付宝(ALI\_APP)，微信(WX\_APP)，银联(UN\_APP)，百�
 **此模块支持沙箱测试，沙箱测试模式下不产生真实交易。** 
 
 # **配置**
-注意: 使用此模块时,请勿同时勾选 aliPay, weChat, unionPay模块.
+注意: 使用此模块时,请勿同时勾选 aliPay, weChat, unionPay, appleUnionPay模块.
 
 **使用此模块之前需先配置config文件的Feature**
 
@@ -32,7 +35,7 @@ beecloud 封装了支付宝(ALI\_APP)，微信(WX\_APP)，银联(UN\_APP)，百�
 ```
 配置描述:
   
-	1.featur-name: beecloud.
+	1.feature-name: beecloud.
 	2.param-urlScheme: 此字段为URL Scheme类型,配置为微信开放平台APPID,使得本应用可以启动微信客户端，并与之交换数据.如果不使用微信支付，可自定义配置。
 	3.param-bcAppID: BeeCloud平台AppID.
 	4.param-sandbox: "true|false"。默认为"false"。  
@@ -174,6 +177,128 @@ function callBack(ret, err) {
 
 iOS系统，Android系统  
 可提供的1.0.0及更高版本 
+
+
+# **isSandboxMode**<div id="a3"></div>
+获取API版本
+  
+isSandboxMode(callback);
+
+## callBack(ret, err)
+
+ret:  
+
+ * 类型：JSON对象  
+ 
+内部字段：
+
+```js
+{
+	flag: true //沙箱测试环境
+}
+```
+## 示例代码
+
+```js
+var demo = api.require('beecloud');
+demo.isSandboxMode(callBack);
+
+function callBack(ret, err) {
+	api.toast({msg:ret.flag});
+}
+```
+
+## 补充说明
+无
+
+## 可用性
+
+iOS系统，Android系统  
+可提供的1.0.0及更高版本 
+
+
+# **isWXAppInstalled**<div id="a3"></div>
+获取API版本
+  
+isWXAppInstalled(callback);
+
+## callBack(ret, err)
+
+ret:  
+
+ * 类型：JSON对象  
+ 
+内部字段：
+
+```js
+{
+	flag: true //沙箱测试环境
+}
+```
+## 示例代码
+
+```js
+var demo = api.require('beecloud');
+demo.isWXAppInstalled(callBack);
+
+function callBack(ret, err) {
+	api.toast({msg:ret.flag});
+}
+```
+
+## 补充说明
+无
+
+## 可用性
+
+iOS系统，Android系统  
+可提供的1.0.0及更高版本
+
+
+# **canMakeApplePayments**<div id="a3"></div>
+获取API版本
+  
+canMakeApplePayments(params, callback);
+
+## params
+
+cardType
+ 
+  * 类型：Int
+  * 默认值：0
+  * 描述：0 代表不区分卡类型；1 代表借记卡；2 代表信用卡。
+
+## callBack(ret, err)
+
+ret:  
+
+ * 类型：JSON对象  
+ 
+内部字段：
+
+```js
+{
+	status: true //沙箱测试环境
+}
+```
+## 示例代码
+
+```js
+var demo = api.require('beecloud');
+demo.isWXAppInstalled(callBack);
+
+function callBack(ret, err) {
+	api.toast({msg:ret.flag});
+}
+```
+
+## 补充说明
+无
+
+## 可用性
+
+iOS系统，Android系统  
+可提供的1.0.0及更高版本
 
 
 

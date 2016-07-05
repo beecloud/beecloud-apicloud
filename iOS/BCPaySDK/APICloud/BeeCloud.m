@@ -31,8 +31,8 @@
     BCPayReq *payReq = [[BCPayReq alloc] init];
     payReq.channel = [paramDic stringValueForKey:@"channel" defaultValue:@""];
     payReq.title = [paramDic stringValueForKey:@"title" defaultValue:@""];
-    payReq.totalfee = [NSString stringWithFormat:@"%ld",(long)[paramDic integerValueForKey:@"totalfee" defaultValue:0]];
-    payReq.billno = [paramDic stringValueForKey:@"billno" defaultValue:@""];
+    payReq.totalFee = [NSString stringWithFormat:@"%ld",(long)[paramDic integerValueForKey:@"totalfee" defaultValue:0]];
+    payReq.billNo = [paramDic stringValueForKey:@"billno" defaultValue:@""];
     payReq.scheme = [[theApp getFeatureByName:kKeyMoudleName] stringValueForKey:kKeyUrlScheme defaultValue:nil];
     payReq.cardType = [paramDic integerValueForKey:@"cardType" defaultValue:0];
     payReq.viewController = self.viewController;

@@ -81,11 +81,11 @@
     UILabel *totalFee = [[UILabel alloc] initWithFrame:CGRectMake(0, 120, self.view.frame.size.width, 40)];
     totalFee.textAlignment = NSTextAlignmentCenter;
     totalFee.font = [UIFont systemFontOfSize:50];
-    totalFee.text = [NSString stringWithFormat:@"￥%.2f", [req.totalfee intValue] * 0.01];
+    totalFee.text = [NSString stringWithFormat:@"￥%.2f", [req.totalFee intValue] * 0.01];
     [self.view addSubview:totalFee];
     
     UILabel *billno = [[UILabel alloc] initWithFrame:CGRectMake(0, 170, self.view.frame.size.width, 30)];
-    billno.text = req.billno;
+    billno.text = req.billNo;
     billno.textAlignment = NSTextAlignmentCenter;
     billno.font = [UIFont systemFontOfSize:16];
     [self.view addSubview:billno];

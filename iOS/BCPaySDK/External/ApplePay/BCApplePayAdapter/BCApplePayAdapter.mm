@@ -70,13 +70,13 @@
 #pragma mark - Implementation ApplePayDelegate
 
 - (void)UPAPayPluginResult:(UPPayResult *)payResult {
-    int errcode = BCErrCodeSentFail;
+    int errcode = BCErrCodeFail;
     NSString *strMsg = @"支付失败";
     
     switch (payResult.paymentResultStatus) {
         case UPPaymentResultStatusSuccess: {
             strMsg = @"支付成功";
-            errcode = BCErrCodeSuccess;
+            errcode = BCSuccess;
             break;
         }
         case UPPaymentResultStatusFailure:
@@ -91,12 +91,14 @@
         }
     }
     
-    BCPayResp *resp = (BCPayResp *)[BCPayCache sharedInstance].bcResp;
-    resp.resultCode = errcode;
-    resp.resultMsg = strMsg;
-    resp.errDetail = payResult.errorDescription.isValid?payResult.errorDescription:strMsg;
-    resp.paySource = @{@"otherInfo": payResult.otherInfo.isValid?payResult.otherInfo:@""};
-    [BCPayCache beeCloudDoResponse];
+    NSMutableDictionary *dic =[NSMutableDictionary dictionaryWithCapacity:10];
+    dic[kKeyResponseResultCode] = @(errcode);
+    dic[kKeyResponseResultMsg] = strMsg;
+    dic[kKeyResponseErrDetail] = payResult.errorDescription.isValid?payResult.errorDescription:strMsg;
+    
+    if ([BCPay getBeeCloudDelegate] && [[BCPay getBeeCloudDelegate] respondsToSelector:@selector(onBeeCloudResp:)]) {
+        [[BCPay getBeeCloudDelegate] onBeeCloudResp:dic];
+    }
     
 }
 

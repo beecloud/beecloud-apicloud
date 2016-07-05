@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BeeCloud.h"
+#import "BCPay.h"
 
 @interface BCUnionPayAdapter : NSObject
 

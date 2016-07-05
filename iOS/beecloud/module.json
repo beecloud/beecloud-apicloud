@@ -1,6 +1,8 @@
-[{
+[
+{
     "name":"beecloud",
     "class":"BeeCloud",
-    "methods":["pay","getApiVersion","isWXAppInstalled","isSandboxMode","canMakeApplePayments"],
+    "methods":["pay","getApiVersion","isSandboxMode","isWXAppInstalled","canMakeApplePayments"],
     "launchClassMethod":"launch"
-}]
+}
+]

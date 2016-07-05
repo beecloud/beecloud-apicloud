@@ -101,13 +101,12 @@
 + (void)setNetworkTimeout:(NSTimeInterval)time;
 
 /**
- *  Channel Type
+ *  处理错误回调
  *
- *  @param channel channel String
- *
- *  @return channelType
+ *  @param resultMsg <#resultMsg description#>
+ *  @param errMsg    <#errMsg description#>
  */
-- (BOOL)isValidChannel:(NSString *)channel;
++ (void)doErrorResponse:(NSString *)resultMsg errDetail:(NSString *)errMsg;
 
 #pragma mark - Send BeeCloud Request
 

@@ -49,18 +49,21 @@
 
 - (void)processOrderForAliPay:(NSDictionary *)resultDic {
     int status = [resultDic[@"resultStatus"] intValue];
-    
-    NSString *strMsg;
+    NSString *strMsg = @"";
     int errcode = 0;
     switch (status) {
         case 9000:
             strMsg = @"支付成功";
-            errcode = BCErrCodeSuccess;
+            errcode = BCSuccess;
+            break;
+        case 8000:
+            strMsg = @"正在处理中";
+            errcode = BCErrCodeCommon;
             break;
         case 4000:
         case 6002:
             strMsg = @"支付失败";
-            errcode = BCErrCodeSentFail;
+            errcode = BCErrCodeFail;
             break;
         case 6001:
             strMsg = @"支付取消";
@@ -71,12 +74,14 @@
             errcode = BCErrCodeUnsupport;
             break;
     }
-    BCPayResp *resp = (BCPayResp *)[BCPayCache sharedInstance].bcResp;
-    resp.resultCode = errcode;
-    resp.resultMsg = strMsg;
-    resp.errDetail = strMsg;
-    resp.paySource = resultDic;
-    [BCPayCache beeCloudDoResponse];
+    NSMutableDictionary *dic =[NSMutableDictionary dictionaryWithCapacity:10];
+    dic[kKeyResponseResultCode] = @(errcode);
+    dic[kKeyResponseResultMsg] = strMsg;
+    dic[kKeyResponseErrDetail] = strMsg;
+    
+    if ([BCPay getBeeCloudDelegate] && [[BCPay getBeeCloudDelegate] respondsToSelector:@selector(onBeeCloudResp:)]) {
+        [[BCPay getBeeCloudDelegate] onBeeCloudResp:dic];
+    }
 }
 
 @end
