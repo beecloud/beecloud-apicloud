@@ -26,10 +26,11 @@ static NSString * const kKeySandbox = @"sandbox";
 static NSString * const kKeyUrlScheme = @"urlScheme";
 
 static NSUInteger const kBCHostCount = 4;
-static NSString * const kBCHosts[] = {@"https://apisz.beecloud.cn",
-    @"https://apiqd.beecloud.cn",
-    @"https://apibj.beecloud.cn",
-    @"https://apihz.beecloud.cn"};
+static NSString * const kBCHost = @"https://apidynamic.beecloud.cn";
+//static NSString * const kBCHosts[] = {@"https://apisz.beecloud.cn",
+//    @"https://apiqd.beecloud.cn",
+//    @"https://apibj.beecloud.cn",
+//    @"https://apihz.beecloud.cn"};
 
 static NSString * const reqApiVersion = @"/2/rest";
 

@@ -32,11 +32,12 @@ typedef NS_ENUM(NSInteger,UPPaymentResultStatus) {
 @end
 
 
+
 @protocol UPAPayPluginDelegate <NSObject>
 /**
  *  支付结果回调函数
  *
  *  @param payResult   以UPPayResult结构向商户返回支付结果
  */
-- (void)UPAPayPluginResult:(UPPayResult *) payResult;
+-(void) UPAPayPluginResult:(UPPayResult *) payResult;
 @end
