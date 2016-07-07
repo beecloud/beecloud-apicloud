@@ -28,6 +28,8 @@
 
 - (BOOL)canMakeApplePayments:(NSUInteger)cardType {
     BOOL status = NO;
+    double version = [[UIDevice currentDevice].systemVersion doubleValue];
+    if (version <= 9.2f) return status;
     switch(cardType) {
         case 0:
         {

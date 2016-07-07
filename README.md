@@ -13,9 +13,10 @@ Description: BeeCloud Pay.
 
 
 # **概述**
-beecloud 封装了支付宝(ALI\_APP)，微信(WX\_APP)，银联(UN\_APP)，百度钱包(BD\_APP)四个主流渠道的支付接口。使用此模块可轻松实现各个渠道的支付功能。  
+beecloud 封装了支付宝(ALI\_APP)，微信(WX\_APP)，银联(UN\_APP)，百度钱包(BD\_APP)，Apple Pay(APPLE)四个主流渠道的支付接口。使用此模块可轻松实现各个渠道的支付功能。  
  
-使用之前需要先到[BeeCloud](https://beecloud.cn) 注册认证，并[快速开始](https://beecloud.cn/apply)接入BeeCloud Pay.
+使用之前需要先到[BeeCloud](https://beecloud.cn) 注册认证，并[快速开始](https://beecloud.cn/apply)接入BeeCloud Pay.  
+更多信息请访问[BeeCloud帮助中心](http://help.beecloud.cn)。
 
 **此模块支持沙箱测试，沙箱测试模式下不产生真实交易。** 
 
@@ -52,7 +53,7 @@ channel：
 
  * 类型：String  
  * 默认值：无  
- * 描述：支付渠道。微信 WX\_APP，支付宝 ALI\_APP，银联在线 UN\_APP，百度钱包 BD\_APP
+ * 描述：支付渠道。微信（WX\_APP），支付宝（ALI\_APP），银联在线（UN\_APP），百度钱包（BD\_APP），Apple Pay（APPLE）
  
 title：  
 
@@ -180,7 +181,7 @@ iOS系统，Android系统
 
 
 # **isSandboxMode**<div id="a3"></div>
-获取API版本
+判断当前是否是沙箱测试环境
   
 isSandboxMode(callback);
 
@@ -214,11 +215,11 @@ function callBack(ret, err) {
 ## 可用性
 
 iOS系统，Android系统  
-可提供的1.0.0及更高版本 
+可提供的1.4.0及更高版本 
 
 
 # **isWXAppInstalled**<div id="a3"></div>
-获取API版本
+判断是否安装微信客户端
   
 isWXAppInstalled(callback);
 
@@ -252,11 +253,11 @@ function callBack(ret, err) {
 ## 可用性
 
 iOS系统，Android系统  
-可提供的1.0.0及更高版本
+可提供的1.4.0及更高版本
 
 
 # **canMakeApplePayments**<div id="a3"></div>
-获取API版本
+判断是否支持Apple Pay
   
 canMakeApplePayments(params, callback);
 
@@ -278,27 +279,30 @@ ret:
 
 ```js
 {
-	status: true //沙箱测试环境
+	status: true //支持
 }
 ```
 ## 示例代码
 
 ```js
 var demo = api.require('beecloud');
-demo.isWXAppInstalled(callBack);
+var params = {
+	cardType: 0 
+};
+demo.canMakeApplePayments(params, callBack);
 
 function callBack(ret, err) {
-	api.toast({msg:ret.flag});
+	api.toast({msg:ret.status});
 }
 ```
 
 ## 补充说明
-无
+商户 App 在调用 Apple Pay 之前要注意根据此方法函数判断手机是否可用 Apple Pay 做应用内支付,从而判断是否显示 Apple Pay 支付按钮。
 
 ## 可用性
 
-iOS系统，Android系统  
-可提供的1.0.0及更高版本
+iOS系统 
+可提供的1.4.0及更高版本
 
 
 
