@@ -65,10 +65,6 @@
     return kApiVersion;
 }
 
-+ (BOOL)canMakeApplePayments:(NSUInteger)cardType {
-    return [BeeCloudAdapter beecloudCanMakeApplePayments:cardType];
-}
-
 + (void)setWillPrintLog:(BOOL)flag {
     [BCPayCache sharedInstance].willPrintLogMsg = flag;
 }

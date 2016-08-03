@@ -59,13 +59,6 @@
 + (BOOL)isWXAppInstalled;
 
 /**
- *  判断是否支持Apple Pay
- *
- *  @return 支持返回YES
- */
-+ (BOOL)canMakeApplePayments:(NSUInteger)cardType;
-
-/**
  *  设置接收消息的对象
  *
  *  @param delegate BeeCloudDelegate对象，用来接收BeeCloud触发的消息。

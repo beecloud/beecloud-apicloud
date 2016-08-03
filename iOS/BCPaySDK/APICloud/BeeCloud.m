@@ -45,12 +45,6 @@
     [self sendResultEventWithCallbackId:_cbId dataDict:@{@"apiVersion":kApiVersion} errDict:nil doDelete:YES];
 }
 
-- (void)canMakeApplePayments:(NSDictionary *)paramDic {
-    _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
-    NSUInteger cardType = [paramDic integerValueForKey:@"cardType" defaultValue:0];
-    [self sendResultEventWithCallbackId:_cbId dataDict:@{@"status":@([BCPay canMakeApplePayments:cardType])} errDict:nil doDelete:YES];
-}
-
 - (void)isWXAppInstalled:(NSDictionary *)paramDic {
     _cbId = [paramDic integerValueForKey:@"cbId" defaultValue:-1];
     [self sendResultEventWithCallbackId:_cbId dataDict:@{@"flag":@([BCPay isWXAppInstalled])} errDict:nil doDelete:YES];

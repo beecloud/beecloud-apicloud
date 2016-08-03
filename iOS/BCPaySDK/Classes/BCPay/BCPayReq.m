@@ -105,9 +105,6 @@
             if ([BCPay getBeeCloudDelegate] && [[BCPay getBeeCloudDelegate] respondsToSelector:@selector(onBeeCloudBaidu:)]) {
                 [[BCPay getBeeCloudDelegate] onBeeCloudBaidu:[dic stringValueForKey:@"url" defaultValue:@""]];
             }
-        } else if ([self.channel isEqualToString:PayChannelApple]) {
-            [dic setObject:self.viewController forKey:@"viewController"];
-            [BeeCloudAdapter beeCloudApplePay:dic];
         }
     }
 }
@@ -118,7 +115,7 @@
     if (!self.channel.isValid) {
         return NO;
     }
-    NSArray *channelList = @[PayChannelWxApp, PayChannelAliApp, PayChannelUnApp, PayChannelBaiduWap, PayChannelBaiduApp, PayChannelBCApp, PayChannelApple];
+    NSArray *channelList = @[PayChannelWxApp, PayChannelAliApp, PayChannelUnApp, PayChannelBaiduWap, PayChannelBaiduApp, PayChannelBCApp];
     return [channelList containsObject:self.channel];
 }
 
@@ -140,19 +137,6 @@
         return NO;
     } else if ([self.channel isEqualToString: PayChannelWxApp] && ![BeeCloudAdapter beeCloudIsWXAppInstalled] && ![BCPayCache currentMode]) {
         [BCPay doErrorResponse:kKeyCheckParamsFail errDetail:@"未找到微信客户端，请先下载安装"];
-        return NO;
-    } else if ([self.channel isEqualToString:PayChannelApple] && ![BeeCloudAdapter beecloudCanMakeApplePayments:self.cardType]) {
-        switch (self.cardType) {
-            case 0:
-                [BCPay doErrorResponse:kKeyCheckParamsFail errDetail:@"此设备不支持Apple Pay"];
-                break;
-            case 1:
-                [BCPay doErrorResponse:kKeyCheckParamsFail errDetail:@"不支持借记卡"];
-                break;
-            case 2:
-                [BCPay doErrorResponse:kKeyCheckParamsFail errDetail:@"不支持信用卡"];
-                break;
-        }
         return NO;
     }
     return YES;

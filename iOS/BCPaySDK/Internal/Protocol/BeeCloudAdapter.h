@@ -18,6 +18,4 @@
 + (BOOL)beeCloudWXPay:(NSMutableDictionary *)dic;
 + (BOOL)beeCloudAliPay:(NSMutableDictionary *)dic;
 + (BOOL)beeCloudUnionPay:(NSMutableDictionary *)dic;
-+ (BOOL)beeCloudApplePay:(NSMutableDictionary *)dic;
-+ (BOOL)beecloudCanMakeApplePayments:(NSUInteger)cardType;
 @end

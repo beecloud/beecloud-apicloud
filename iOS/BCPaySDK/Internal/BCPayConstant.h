@@ -11,7 +11,7 @@
 #ifndef BCPaySDK_BCPayConstant_h
 #define BCPaySDK_BCPayConstant_h
 
-static NSString * const kApiVersion = @"1.4.0";//api版本号
+static NSString * const kApiVersion = @"1.4.1";//api版本号
 
 static NSString * const kNetWorkError = @"网络请求失败";
 static NSString * const kKeyResponseResultCode = @"result_code";
@@ -63,13 +63,11 @@ static NSString * const PayChannelUnApp = @"UN_APP";//银联APP
 static NSString * const PayChannelBaiduWap = @"BD_WAP";
 static NSString * const PayChannelBaiduApp = @"BD_APP";
 static NSString * const PayChannelBCApp = @"BC_APP";
-static NSString * const PayChannelApple = @"APPLE";
 
 //Adapter
 static NSString * const kAdapterWXPay = @"BCWXPayAdapter";
 static NSString * const kAdapterAliPay = @"BCAliPayAdapter";
 static NSString * const kAdapterUnionPay = @"BCUnionPayAdapter";
-static NSString * const kAdapterApplePay = @"BCApplePayAdapter";
 
 typedef NS_ENUM(NSInteger, BCErrCode) {
     BCSuccess           = 0,    /**< 成功    */

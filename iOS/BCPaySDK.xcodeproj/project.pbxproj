@@ -22,7 +22,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		368D38F61D225B5900929E5E /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368D38F51D225B5900929E5E /* PassKit.framework */; };
 		36EC7F2A1D2BA41900934B08 /* BeeCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7ED31D2BA41900934B08 /* BeeCloud.h */; };
 		36EC7F2B1D2BA41900934B08 /* BeeCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EC7ED41D2BA41900934B08 /* BeeCloud.m */; };
 		36EC7F2C1D2BA41900934B08 /* NSDictionaryUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7ED61D2BA41900934B08 /* NSDictionaryUtils.h */; };
@@ -40,10 +39,6 @@
 		36EC7F381D2BA41900934B08 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36EC7EE71D2BA41900934B08 /* AlipaySDK.framework */; };
 		36EC7F391D2BA41900934B08 /* BCAliPayAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EE91D2BA41900934B08 /* BCAliPayAdapter.h */; };
 		36EC7F3A1D2BA41900934B08 /* BCAliPayAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EC7EEA1D2BA41900934B08 /* BCAliPayAdapter.m */; };
-		36EC7F3B1D2BA41900934B08 /* BCApplePayAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EED1D2BA41900934B08 /* BCApplePayAdapter.h */; };
-		36EC7F3C1D2BA41900934B08 /* BCApplePayAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 36EC7EEE1D2BA41900934B08 /* BCApplePayAdapter.mm */; };
-		36EC7F3D1D2BA41900934B08 /* UPAPayPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EEF1D2BA41900934B08 /* UPAPayPlugin.h */; };
-		36EC7F3E1D2BA41900934B08 /* UPAPayPluginDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EF01D2BA41900934B08 /* UPAPayPluginDelegate.h */; };
 		36EC7F3F1D2BA41900934B08 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EF21D2BA41900934B08 /* JSON.h */; };
 		36EC7F401D2BA41900934B08 /* JSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EF31D2BA41900934B08 /* JSONParser.h */; };
 		36EC7F411D2BA41900934B08 /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EF41D2BA41900934B08 /* NSObject+SBJSON.h */; };
@@ -134,10 +129,6 @@
 		36EC7EE71D2BA41900934B08 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		36EC7EE91D2BA41900934B08 /* BCAliPayAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAliPayAdapter.h; sourceTree = "<group>"; };
 		36EC7EEA1D2BA41900934B08 /* BCAliPayAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAliPayAdapter.m; sourceTree = "<group>"; };
-		36EC7EED1D2BA41900934B08 /* BCApplePayAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCApplePayAdapter.h; sourceTree = "<group>"; };
-		36EC7EEE1D2BA41900934B08 /* BCApplePayAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BCApplePayAdapter.mm; sourceTree = "<group>"; };
-		36EC7EEF1D2BA41900934B08 /* UPAPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPlugin.h; sourceTree = "<group>"; };
-		36EC7EF01D2BA41900934B08 /* UPAPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPluginDelegate.h; sourceTree = "<group>"; };
 		36EC7EF21D2BA41900934B08 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		36EC7EF31D2BA41900934B08 /* JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
 		36EC7EF41D2BA41900934B08 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
@@ -192,7 +183,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				368D38F61D225B5900929E5E /* PassKit.framework in Frameworks */,
 				36EC7F381D2BA41900934B08 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				36EC7EE61D2BA41900934B08 /* AliPay */,
-				36EC7EEB1D2BA41900934B08 /* ApplePay */,
 				36EC7EF11D2BA41900934B08 /* JSON */,
 				36EC7EFA1D2BA41900934B08 /* UnionPay */,
 				36EC7F001D2BA41900934B08 /* WXPay */,
@@ -310,25 +299,6 @@
 				36EC7EEA1D2BA41900934B08 /* BCAliPayAdapter.m */,
 			);
 			path = BCAliPayAdapter;
-			sourceTree = "<group>";
-		};
-		36EC7EEB1D2BA41900934B08 /* ApplePay */ = {
-			isa = PBXGroup;
-			children = (
-				36EC7EEC1D2BA41900934B08 /* BCApplePayAdapter */,
-				36EC7EEF1D2BA41900934B08 /* UPAPayPlugin.h */,
-				36EC7EF01D2BA41900934B08 /* UPAPayPluginDelegate.h */,
-			);
-			path = ApplePay;
-			sourceTree = "<group>";
-		};
-		36EC7EEC1D2BA41900934B08 /* BCApplePayAdapter */ = {
-			isa = PBXGroup;
-			children = (
-				36EC7EED1D2BA41900934B08 /* BCApplePayAdapter.h */,
-				36EC7EEE1D2BA41900934B08 /* BCApplePayAdapter.mm */,
-			);
-			path = BCApplePayAdapter;
 			sourceTree = "<group>";
 		};
 		36EC7EF11D2BA41900934B08 /* JSON */ = {
@@ -463,9 +433,7 @@
 				36EC7F2A1D2BA41900934B08 /* BeeCloud.h in Headers */,
 				36EC7F301D2BA41900934B08 /* BCBaseReq.h in Headers */,
 				36EC7F491D2BA41900934B08 /* UPPayPlugin.h in Headers */,
-				36EC7F3B1D2BA41900934B08 /* BCApplePayAdapter.h in Headers */,
 				36EC7F461D2BA41900934B08 /* SBJsonWriter.h in Headers */,
-				36EC7F3D1D2BA41900934B08 /* UPAPayPlugin.h in Headers */,
 				36EC7F361D2BA41900934B08 /* BCPayResp.h in Headers */,
 				36EC7F581D2BA41900934B08 /* BCURLResponseSerialization.h in Headers */,
 				36EC7F441D2BA41900934B08 /* SBJsonBase.h in Headers */,
@@ -481,7 +449,6 @@
 				36EC7F641D2BA41900934B08 /* BeeCloudAdapter.h in Headers */,
 				36EC7F6B1D2BA41900934B08 /* BCPay.h in Headers */,
 				36EC7F5E1D2BA41900934B08 /* BCPayConstant.h in Headers */,
-				36EC7F3E1D2BA41900934B08 /* UPAPayPluginDelegate.h in Headers */,
 				36EC7F561D2BA41900934B08 /* BCURLRequestSerialization.h in Headers */,
 				36EC7F3F1D2BA41900934B08 /* JSON.h in Headers */,
 				36EC7F411D2BA41900934B08 /* NSObject+SBJSON.h in Headers */,
@@ -594,7 +561,6 @@
 				36EC7F4C1D2BA41900934B08 /* BCWXPayAdapter.m in Sources */,
 				36EC7F611D2BA41900934B08 /* BCPayUtil.m in Sources */,
 				36EC7F571D2BA41900934B08 /* BCURLRequestSerialization.m in Sources */,
-				36EC7F3C1D2BA41900934B08 /* BCApplePayAdapter.mm in Sources */,
 				36EC7F551D2BA41900934B08 /* BCSecurityPolicy.m in Sources */,
 				36EC7F5D1D2BA41900934B08 /* BCPayCache.m in Sources */,
 				36EC7F681D2BA41900934B08 /* BaiduViewController.m in Sources */,
