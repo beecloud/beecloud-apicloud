@@ -53,7 +53,10 @@
         return [BeeCloudAdapter beeCloud:kAdapterWXPay handleOpenUrl:url];
     } else if (BCPayUrlAlipay == [BCPayUtil getUrlType:url]) {
         return [BeeCloudAdapter beeCloud:kAdapterAliPay handleOpenUrl:url];
+    } else if (BCPayUrlUnionPay == [BCPayUtil getUrlType:url]) {
+        return [BeeCloudAdapter beeCloud:kAdapterUnionPay handleOpenUrl:url];
     }
+
     return NO;
 }
 

@@ -48,8 +48,10 @@
         return BCPayUrlAlipay;
     else if ([url.scheme hasPrefix:@"wx"] && [url.host isEqualToString:@"pay"])
         return BCPayUrlWeChat;
-    else
-        return BCPayUrlUnknown;
+    else if ([url.host isEqualToString:@"uppayresult"]) {
+        return BCPayUrlUnionPay;
+    }
+    return BCPayUrlUnknown;
 }
 
 + (NSString *)generateRandomUUID {

@@ -8,9 +8,9 @@
 
 #import "BCUnionPayAdapter.h"
 #import "BeeCloudAdapterProtocol.h"
-#import "UPPayPlugin.h"
+#import "UPPaymentControl.h"
 
-@interface BCUnionPayAdapter ()<BeeCloudAdapterDelegate, UPPayPluginDelegate>
+@interface BCUnionPayAdapter ()<BeeCloudAdapterDelegate>
 
 @end
 
@@ -26,11 +26,19 @@
     return instance;
 }
 
+- (BOOL)handleOpenUrl:(NSURL *)url {
+    [[UPPaymentControl defaultControl] handlePaymentResult:url completeBlock:^(NSString *code, NSDictionary *data) {
+        [[BCUnionPayAdapter sharedInstance] UPPayPluginResult:code];
+    }];
+    return YES;
+}
+
 - (BOOL)unionPay:(NSMutableDictionary *)dic {
     NSString *tn = [dic stringValueForKey:@"tn" defaultValue:@""];
+    NSString *scheme = [dic stringValueForKey:@"scheme" defaultValue:@""];
     if (tn.isValid) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [UPPayPlugin startPay:tn mode:@"00" viewController:dic[@"viewController"] delegate:[BCUnionPayAdapter sharedInstance]];
+            [[UPPaymentControl defaultControl] startPay:tn fromScheme:scheme mode:@"00" viewController:dic[@"viewController"]];
         });
         return YES;
     }

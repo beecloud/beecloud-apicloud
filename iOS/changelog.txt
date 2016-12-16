@@ -1,6 +1,9 @@
 BeeCloud Moudle Changelog
 ==========================
 
+v1.5.0 2016年12月16日
++ 更新微信、支付宝、银联SDK支持苹果ATS
+
 v1.4.1 2016年08月03日
 + iOS拆除Apple Pay功能至bcapplepay模块
 + 更新微信、支付宝SDK支持ipv6

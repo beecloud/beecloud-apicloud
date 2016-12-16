@@ -99,6 +99,7 @@
         } else if ([self.channel isEqualToString:PayChannelWxApp]) {
             [BeeCloudAdapter beeCloudWXPay:dic];
         } else if ([self.channel isEqualToString:PayChannelUnApp] || [self.channel isEqualToString:PayChannelBCApp]) {
+            [dic setObject:self.scheme forKey:@"scheme"];
             [dic setObject:self.viewController forKey:@"viewController"];
             [BeeCloudAdapter beeCloudUnionPay:dic];
         } else if ([self.channel isEqualToString:PayChannelBaiduWap]) {
@@ -132,7 +133,7 @@
     } else if (!self.billNo.isValidTraceNo || (self.billNo.length < 8) || (self.billNo.length > 32)) {
         [BCPay doErrorResponse:kKeyCheckParamsFail errDetail:@"billno 必须是长度8~32位字母和/或数字组合成的字符串"];
         return NO;
-    } else if (([self.channel isEqualToString: PayChannelAliApp]) && !self.scheme.isValid) {
+    } else if (([self.channel isEqualToString: PayChannelAliApp] || [self.channel isEqualToString: PayChannelUnApp]) && !self.scheme.isValid) {
         [BCPay doErrorResponse:kKeyCheckParamsFail errDetail:@"scheme 不是合法的字符串，将导致无法从支付宝钱包返回应用"];
         return NO;
     } else if ([self.channel isEqualToString: PayChannelWxApp] && ![BeeCloudAdapter beeCloudIsWXAppInstalled] && ![BCPayCache currentMode]) {

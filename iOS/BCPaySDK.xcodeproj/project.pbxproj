@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		36E128A71E03C27A0082573A /* UPPaymentControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 36E128A61E03C27A0082573A /* UPPaymentControl.h */; };
 		36EC7F2A1D2BA41900934B08 /* BeeCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7ED31D2BA41900934B08 /* BeeCloud.h */; };
 		36EC7F2B1D2BA41900934B08 /* BeeCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EC7ED41D2BA41900934B08 /* BeeCloud.m */; };
 		36EC7F2C1D2BA41900934B08 /* NSDictionaryUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7ED61D2BA41900934B08 /* NSDictionaryUtils.h */; };
@@ -49,8 +50,6 @@
 		36EC7F461D2BA41900934B08 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EF91D2BA41900934B08 /* SBJsonWriter.h */; };
 		36EC7F471D2BA41900934B08 /* BCUnionPayAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EFC1D2BA41900934B08 /* BCUnionPayAdapter.h */; };
 		36EC7F481D2BA41900934B08 /* BCUnionPayAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EC7EFD1D2BA41900934B08 /* BCUnionPayAdapter.m */; };
-		36EC7F491D2BA41900934B08 /* UPPayPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EFE1D2BA41900934B08 /* UPPayPlugin.h */; };
-		36EC7F4A1D2BA41900934B08 /* UPPayPluginDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7EFF1D2BA41900934B08 /* UPPayPluginDelegate.h */; };
 		36EC7F4B1D2BA41900934B08 /* BCWXPayAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7F021D2BA41900934B08 /* BCWXPayAdapter.h */; };
 		36EC7F4C1D2BA41900934B08 /* BCWXPayAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EC7F031D2BA41900934B08 /* BCWXPayAdapter.m */; };
 		36EC7F4D1D2BA41900934B08 /* WXApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EC7F041D2BA41900934B08 /* WXApi.h */; };
@@ -111,7 +110,7 @@
 
 /* Begin PBXFileReference section */
 		364BC4D41B5502C700EAFCCE /* libBeeCloud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBeeCloud.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		368D38F51D225B5900929E5E /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		36E128A61E03C27A0082573A /* UPPaymentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPaymentControl.h; sourceTree = "<group>"; };
 		36EC7ED31D2BA41900934B08 /* BeeCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeeCloud.h; sourceTree = "<group>"; };
 		36EC7ED41D2BA41900934B08 /* BeeCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeeCloud.m; sourceTree = "<group>"; };
 		36EC7ED61D2BA41900934B08 /* NSDictionaryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryUtils.h; sourceTree = "<group>"; };
@@ -139,8 +138,6 @@
 		36EC7EF91D2BA41900934B08 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		36EC7EFC1D2BA41900934B08 /* BCUnionPayAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCUnionPayAdapter.h; sourceTree = "<group>"; };
 		36EC7EFD1D2BA41900934B08 /* BCUnionPayAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCUnionPayAdapter.m; sourceTree = "<group>"; };
-		36EC7EFE1D2BA41900934B08 /* UPPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPlugin.h; sourceTree = "<group>"; };
-		36EC7EFF1D2BA41900934B08 /* UPPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPluginDelegate.h; sourceTree = "<group>"; };
 		36EC7F021D2BA41900934B08 /* BCWXPayAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCWXPayAdapter.h; sourceTree = "<group>"; };
 		36EC7F031D2BA41900934B08 /* BCWXPayAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCWXPayAdapter.m; sourceTree = "<group>"; };
 		36EC7F041D2BA41900934B08 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -194,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				36EC7ED11D2BA41900934B08 /* BCPaySDK */,
-				368D38F51D225B5900929E5E /* PassKit.framework */,
 				364BC4D51B5502C700EAFCCE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -319,9 +315,8 @@
 		36EC7EFA1D2BA41900934B08 /* UnionPay */ = {
 			isa = PBXGroup;
 			children = (
+				36E128A61E03C27A0082573A /* UPPaymentControl.h */,
 				36EC7EFB1D2BA41900934B08 /* BCUnionPayAdapter */,
-				36EC7EFE1D2BA41900934B08 /* UPPayPlugin.h */,
-				36EC7EFF1D2BA41900934B08 /* UPPayPluginDelegate.h */,
 			);
 			path = UnionPay;
 			sourceTree = "<group>";
@@ -432,8 +427,8 @@
 				36EC7F471D2BA41900934B08 /* BCUnionPayAdapter.h in Headers */,
 				36EC7F2A1D2BA41900934B08 /* BeeCloud.h in Headers */,
 				36EC7F301D2BA41900934B08 /* BCBaseReq.h in Headers */,
-				36EC7F491D2BA41900934B08 /* UPPayPlugin.h in Headers */,
 				36EC7F461D2BA41900934B08 /* SBJsonWriter.h in Headers */,
+				36E128A71E03C27A0082573A /* UPPaymentControl.h in Headers */,
 				36EC7F361D2BA41900934B08 /* BCPayResp.h in Headers */,
 				36EC7F581D2BA41900934B08 /* BCURLResponseSerialization.h in Headers */,
 				36EC7F441D2BA41900934B08 /* SBJsonBase.h in Headers */,
@@ -445,7 +440,6 @@
 				36EC7F511D2BA41900934B08 /* BCNetworking.h in Headers */,
 				36EC7F5F1D2BA41900934B08 /* BCPayObjects.h in Headers */,
 				36EC7F541D2BA41900934B08 /* BCSecurityPolicy.h in Headers */,
-				36EC7F4A1D2BA41900934B08 /* UPPayPluginDelegate.h in Headers */,
 				36EC7F641D2BA41900934B08 /* BeeCloudAdapter.h in Headers */,
 				36EC7F6B1D2BA41900934B08 /* BCPay.h in Headers */,
 				36EC7F5E1D2BA41900934B08 /* BCPayConstant.h in Headers */,
